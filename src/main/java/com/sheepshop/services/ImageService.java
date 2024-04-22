@@ -1,4 +1,4 @@
 package com.sheepshop.services;
 
-public class BillServiceImpl {
+public class ImageService {
 }

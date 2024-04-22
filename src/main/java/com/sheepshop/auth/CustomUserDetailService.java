@@ -2,7 +2,7 @@ package com.sheepshop.auth;
 
 import com.sheepshop.entitys.User;
 import com.sheepshop.entitys.UserRole;
-import com.sheepshop.services.impl.UserService;
+import com.sheepshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

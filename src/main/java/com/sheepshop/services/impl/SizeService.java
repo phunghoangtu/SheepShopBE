@@ -8,7 +8,7 @@ public interface SizeService {
 
     List<Size> getSizeList();
 
-    Size findById(Integer id);
+    Size findById(Long id);
 
     void save(Size size);
 

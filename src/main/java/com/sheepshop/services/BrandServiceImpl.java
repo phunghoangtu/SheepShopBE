@@ -20,7 +20,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand findById(Integer id) {
+    public Brand findById(Long id) {
         return brandRepository.findById(id).get();
     }
 

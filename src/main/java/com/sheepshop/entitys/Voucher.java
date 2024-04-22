@@ -18,7 +18,7 @@ public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 30)
     @Column(name = "code", length = 30)
@@ -35,7 +35,7 @@ public class Voucher {
     @Column(name = "discount")
     private Integer discount;
 
-    @Column(name = "Cash")
+    @Column(name = "Cash", precision = 18)
     private BigDecimal cash;
 
     @Column(name = "start_date")

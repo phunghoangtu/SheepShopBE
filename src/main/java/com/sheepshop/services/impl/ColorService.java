@@ -8,7 +8,7 @@ public interface ColorService {
 
     List<Color> getColorList();
 
-    Color findById(Integer id);
+    Color findById(Long id);
 
     void save(Color color);
 

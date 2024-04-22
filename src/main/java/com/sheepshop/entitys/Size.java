@@ -6,9 +6,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 @Getter
 @Setter
 @Entity
@@ -17,7 +14,7 @@ public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @jakarta.validation.constraints.Size(max = 50)
     @Nationalized
@@ -32,7 +29,5 @@ public class Size {
     @ColumnDefault("0")
     @Column(name = "status")
     private Integer status;
-
-
 
 }

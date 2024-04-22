@@ -16,7 +16,7 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 30)
     @Column(name = "code", length = 30)
@@ -25,7 +25,7 @@ public class Bill {
     @Column(name = "payment_date")
     private Instant paymentDate;
 
-    @Column(name = "total_price")
+    @Column(name = "total_price", precision = 18)
     private BigDecimal totalPrice;
 
     @Column(name = "total_price_last")

@@ -20,7 +20,7 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public Color findById(Integer id) {
+    public Color findById(Long id) {
         return colorRepository.findById(id).get();
     }
 

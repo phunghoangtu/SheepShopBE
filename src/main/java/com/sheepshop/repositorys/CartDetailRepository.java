@@ -1,11 +1,11 @@
 package com.sheepshop.repositorys;
 
-import com.sheepshop.entitys.Bill;
+import com.sheepshop.entitys.CartDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartDetailRepository extends JpaRepository<Bill , Integer> {
+public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
 
 
 }

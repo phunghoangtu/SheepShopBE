@@ -20,7 +20,7 @@ public class CollarStyleServiceImpl implements CollarStyleService {
     }
 
     @Override
-    public CollarStyle findById(Integer id) {
+    public CollarStyle findById(Long id) {
         return collarStyleRepository.findById(id).get();
     }
 

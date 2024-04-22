@@ -8,7 +8,7 @@ public interface BrandService {
 
     List<Brand> getBrandList();
 
-    Brand findById(Integer id);
+    Brand findById(Long id);
 
     void save(Brand brand);
 

@@ -8,7 +8,7 @@ public interface MaterialService {
 
     List<Material> getMaterialList();
 
-    Material findById(Integer id);
+    Material findById(Long id);
 
     void save(Material material);
 

@@ -8,7 +8,7 @@ public interface CollarStyleService {
 
     List<CollarStyle> getCollarStyleList();
 
-    CollarStyle findById(Integer id);
+    CollarStyle findById(Long id);
 
     void save(CollarStyle collarStyle);
 

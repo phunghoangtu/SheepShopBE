@@ -8,7 +8,7 @@ public interface CategoryService {
 
     List<Category> getCategoryList();
 
-    Category findById(Integer id);
+    Category findById(Long id);
 
     void save(Category category);
 

@@ -12,6 +12,6 @@ public interface RoleService {
 
     Role findByName(String name);
 
-    Role findById(Integer id);
+    Role findById(Long id);
 
 }

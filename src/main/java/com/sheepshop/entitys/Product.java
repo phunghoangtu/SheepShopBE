@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "price")
+    @Column(name = "price", precision = 18)
     private BigDecimal price;
 
     @Nationalized

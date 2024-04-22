@@ -18,7 +18,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 30)
     @Column(name = "code", length = 30)
@@ -42,7 +42,7 @@ public class User {
     private String image;
 
     @Column(name = "gender")
-    private Integer gender;
+    private Long gender;
 
     @Size(max = 20)
     @Column(name = "phone", length = 20)
@@ -59,7 +59,7 @@ public class User {
     @Column(name = "status")
     private Integer status;
 
-    @OneToMany(mappedBy = "user" ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new LinkedHashSet<>();
 
 }

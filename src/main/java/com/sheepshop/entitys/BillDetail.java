@@ -14,7 +14,7 @@ public class BillDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bill_id")
@@ -27,7 +27,7 @@ public class BillDetail {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "price")
+    @Column(name = "price", precision = 18)
     private BigDecimal price;
 
 }

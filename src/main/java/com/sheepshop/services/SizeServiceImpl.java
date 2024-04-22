@@ -21,7 +21,7 @@ public class SizeServiceImpl implements SizeService {
     }
 
     @Override
-    public Size findById(Integer id) {
+    public Size findById(Long id) {
         return sizeRepository.findById(id).get();
     }
     @Override

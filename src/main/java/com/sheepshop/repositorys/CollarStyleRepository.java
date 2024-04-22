@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CollarStyleRepository extends JpaRepository<CollarStyle , Integer>{
+public interface CollarStyleRepository extends JpaRepository<CollarStyle, Long>{
 
 }

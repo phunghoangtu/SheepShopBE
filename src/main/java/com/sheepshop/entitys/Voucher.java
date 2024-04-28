@@ -1,5 +1,6 @@
 package com.sheepshop.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -47,5 +50,9 @@ public class Voucher {
     @ColumnDefault("0")
     @Column(name = "status")
     private Integer status;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "voucher")
+    private Set<Bill> bills = new HashSet<Bill>();
 
 }

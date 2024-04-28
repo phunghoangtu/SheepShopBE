@@ -284,9 +284,13 @@ VALUES
 -- Thêm dữ liệu vào bảng "bill"
 INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, pay_status, code_ghn, user_id, voucher_id, customer_id)
 VALUES
-    ('B001', GETDATE() , 500.00, GETDATE() , 1, 1 , 'GHNCODE001' , 1, 1, 1);
+    ('B001', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B002', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B003', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B004', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B005', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill_detail"
 INSERT INTO bill_detail (bill_id, product_id, quantity, price)
 VALUES
-    (1, 1, 2, 50.00);
+    (Null, 1, 2, 50.00);

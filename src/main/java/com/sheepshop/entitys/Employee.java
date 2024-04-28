@@ -15,8 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "employee")
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -61,12 +61,12 @@ public class User {
     @Column(name = "status")
     private Integer status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private Set<Bill> bills = new HashSet<Bill>();
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private Set<UserRole> userRoles = new HashSet<UserRole>();
+    @OneToMany(mappedBy = "employee")
+    private Set<Bill> bills = new HashSet<Bill>();
 
 }

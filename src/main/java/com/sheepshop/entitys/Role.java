@@ -1,11 +1,14 @@
 package com.sheepshop.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -19,12 +22,17 @@ public class Role {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Size(max = 15)
+    @Size(max = 50)
     @Nationalized
-    @Column(name = "name", length = 15)
+    @Column(name = "name", length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "role" , fetch = FetchType.EAGER)
-    private Set<UserRole> userRoles = new LinkedHashSet<>();
+    @ColumnDefault("0")
+    @Column(name = "status")
+    private Integer status;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "role")
+    private Set<Employee> employees = new HashSet<Employee>();
 
 }

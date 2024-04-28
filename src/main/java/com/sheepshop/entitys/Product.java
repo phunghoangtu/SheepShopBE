@@ -1,5 +1,6 @@
 package com.sheepshop.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -8,6 +9,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,6 +22,34 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "collar_style_id")
+    private CollarStyle collarStyle;
+
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
+
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private com.sheepshop.entitys.Size size;
+
+    @ManyToOne
+    @JoinColumn(name = "material_id")
+    private Material material;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     @Size(max = 30)
     @Column(name = "code", length = 30)
@@ -43,32 +75,12 @@ public class Product {
     @Column(name = "status")
     private Integer status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private Set<BillDetail> billDetails = new HashSet<BillDetail>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "collar_style_id")
-    private CollarStyle collarStyle;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "color_id")
-    private Color color;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "size_id")
-    private com.sheepshop.entitys.Size size;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "material_id")
-    private Material material;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "image_id")
-    private Image image;
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private Set<CartDetail> cartDetails = new HashSet<CartDetail>();
 
 }

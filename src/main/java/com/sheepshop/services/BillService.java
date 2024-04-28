@@ -2,11 +2,9 @@ package com.sheepshop.services;
 
 
 import com.sheepshop.entitys.Bill;
-import com.sheepshop.entitys.Customer;
-import com.sheepshop.entitys.User;
 import com.sheepshop.repositorys.BillRepository;
 import com.sheepshop.repositorys.CustomerRepository;
-import com.sheepshop.repositorys.UserRepository;
+import com.sheepshop.repositorys.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class BillService {
     private BillRepository billRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private CustomerRepository customerRepository;

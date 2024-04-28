@@ -62,4 +62,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private Set<Bill> bills = new HashSet<Bill>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer")
+    private Set<Cart> carts = new HashSet<Cart>();
+
 }

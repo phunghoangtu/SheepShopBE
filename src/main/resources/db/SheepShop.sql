@@ -81,7 +81,13 @@ CREATE TABLE customer (
                        status	INT DEFAULT 0,
 )
     GO
-CREATE TABLE users (
+CREATE TABLE role (
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                       name NVARCHAR(50),
+					   status	INT DEFAULT 0,
+)
+    GO
+CREATE TABLE employee (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                        code VARCHAR(30) UNIQUE,
                        fullname NVARCHAR(100),
@@ -93,19 +99,10 @@ CREATE TABLE users (
                        email VARCHAR(100),
                        enabled BIT,
                        status	INT DEFAULT 0,
+					   role_id INT REFERENCES role(id),
 )
     GO
-CREATE TABLE role (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(15),
-)
-    GO
-CREATE TABLE user_role (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       user_id INT REFERENCES users(id),
-                       role_id INT REFERENCES role(id),
-)
-    GO
+
 CREATE TABLE voucher (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                        code VARCHAR(30) UNIQUE,
@@ -128,7 +125,7 @@ CREATE TABLE bill (
                        pay_type  INT ,
                        pay_status INT default 0,
                        code_ghn VARCHAR(30) ,
-                       user_id INT REFERENCES users(id),
+                       employee_id INT REFERENCES employee(id),
                        voucher_id INT REFERENCES voucher(id),
                        customer_id INT REFERENCES customer(id),
 )
@@ -257,20 +254,17 @@ VALUES
     ('C004', 'Emily Davis', 'image4.jpg', 2, '321654987', 'emilydavis@example.com', 0),
     ('C005', 'David Wilson', 'image5.jpg', 1, '789123456', 'davidwilson@example.com', 0);
 
--- Thêm dữ liệu vào bảng "users"
-INSERT INTO users (code, fullname, username, image, gender, phone, email, enabled, status)
-VALUES
-    ('U001', 'John Doe', 'Admin', 'image1.jpg', 1, '123456789', 'johndoe@example.com', 1, 0);
-
 -- Thêm dữ liệu vào bảng "role"
 INSERT INTO role (name)
 VALUES
     ('ADMIN');
 
--- Thêm dữ liệu vào bảng "authorities"
-INSERT INTO user_role(user_id, role_id)
+-- Thêm dữ liệu vào bảng "users"
+INSERT INTO employee(code, fullname, username, image, gender, phone, email, enabled, role_id)
 VALUES
-    (1, 1);
+    ('U001', 'John Doe', 'Admin', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1);
+
+
 
 -- Thêm dữ liệu vào bảng "voucher"
 INSERT INTO voucher (code, name, type_voucher, discount, Cash, start_date, end_date, status)
@@ -282,7 +276,7 @@ VALUES
     ('V005', 'Summer Promotion', 1, 30, 150.00, '2024-06-01', '2024-08-31', 0);
 
 -- Thêm dữ liệu vào bảng "bill"
-INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, pay_status, code_ghn, user_id, voucher_id, customer_id)
+INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, pay_status, code_ghn, employee_id, voucher_id, customer_id)
 VALUES
     ('B001', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
 	('B002', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),

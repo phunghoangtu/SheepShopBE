@@ -31,8 +31,12 @@ public class BillService {
     }
 
     private String getNextCode() {
-        int currentCode = Integer.parseInt(billRepository.getBiggestMa().substring(2));
-        String newCode = "HD" + ++currentCode;
+        String biggestMa = billRepository.getBiggestMa();
+        int currentCode = 1;
+        if (biggestMa != null && biggestMa.length() > 2) {
+            currentCode = Integer.parseInt(biggestMa.substring(2));
+        }
+        String newCode = "HD" + String.format("%02d", currentCode + 1);
         return newCode;
     }
 

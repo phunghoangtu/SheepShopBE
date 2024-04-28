@@ -124,9 +124,9 @@ CREATE TABLE bill (
                        code VARCHAR(30) UNIQUE,
                        payment_date DATETIME2 ,
                        total_price DECIMAL ,
-                       total_price_last DATETIME2 ,
+                       total_price_last DECIMAL ,
                        pay_type  INT ,
-                       pay_status INT ,
+                       pay_status INT default 0,
                        code_ghn VARCHAR(30) ,
                        user_id INT REFERENCES users(id),
                        voucher_id INT REFERENCES voucher(id),
@@ -284,11 +284,11 @@ VALUES
 -- Thêm dữ liệu vào bảng "bill"
 INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, pay_status, code_ghn, user_id, voucher_id, customer_id)
 VALUES
-    ('B001', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B002', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B003', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B004', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B005', GETDATE() , 500.00, GETDATE() , 1, 0 , 'GHNCODE001' , 1, 1, 1);
+    ('B001', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B002', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B003', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B004', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
+	('B005', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill_detail"
 INSERT INTO bill_detail (bill_id, product_id, quantity, price)

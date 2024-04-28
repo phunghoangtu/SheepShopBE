@@ -31,7 +31,7 @@ public class Bill implements Serializable {
     private BigDecimal totalPrice;
 
     @Column(name = "total_price_last")
-    private Instant totalPriceLast;
+    private BigDecimal totalPriceLast;
 
     @Column(name = "pay_type")
     private Integer payType;
@@ -52,7 +52,6 @@ public class Bill implements Serializable {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
 
     @ManyToOne
     @JoinColumn(name = "voucher_id")

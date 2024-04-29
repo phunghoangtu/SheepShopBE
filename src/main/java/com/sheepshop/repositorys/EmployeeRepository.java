@@ -13,22 +13,21 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query(value = "Select e from Employee e where e.status = 0")
-    public List<Employee> getAll();
+    List<Employee> getAll();
 
     @Query(value = "Select e from Employee e where e.fullname like :fullname")
-    public List<Employee> searchByName(@Param("fullname") String fullname);
+    List<Employee> searchByName(@Param("fullname") String fullname);
 
     @Query(value = "select e from Employee e where e.id = :id")
-    public Employee getById(@Param("id") Integer Id);
+    Employee getById(@Param("id") Integer id);
 
     @Query(value = "select e from Employee e where e.username = :username")
-    public Employee getByUsername(@Param("username") String username);
+    Employee getByUsername(@Param("username") String username);
 
-    @Query(value = "select e from Employee e where e.status = 0 and (e.role.id = :idRole or :idRole is null)")
-    public List<Employee> getEmployeeByRole(@Param("idRole") Integer id);
+    @Query(value = "select e from Employee e where e.status = 0 and (e.role.id = :role_id or :role_id is null)")
+    List<Employee> getEmployeeByRole(@Param("role_id") Integer role_id);
 
-    @Query(value = "Select e from Employee e where e.status = :status")
-    public List<Employee> getByStatus(@Param("status") Integer status);
+
 
 
 }

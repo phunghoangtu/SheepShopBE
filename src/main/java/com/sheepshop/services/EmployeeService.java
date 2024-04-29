@@ -19,9 +19,9 @@ public class EmployeeService {
         return employeeRepository.getAll();
     }
 
-    @Cacheable(value = "employeeCache", key = "#Id")
-    public Employee getById(Integer Id){
-        return employeeRepository.getById(Id);
+    @Cacheable(value = "employeeCache", key = "#id")
+    public Employee getById(Integer id){
+        return employeeRepository.getById(id);
     }
 
     @Cacheable(value = "employeeCache", key = "#username")
@@ -29,14 +29,13 @@ public class EmployeeService {
         return employeeRepository.getByUsername(username);
     }
 
-
     @Cacheable(value = "employeeCache", key = "#name")
     public List<Employee> getAllbyName(String name){
         return employeeRepository.searchByName('%'+name+'%');
     }
 
-    public List<Employee> getAllByFilter(Integer idRole){
-        return employeeRepository.getEmployeeByRole(idRole);
+    public List<Employee> getAllByFilter(Integer role_id){
+        return employeeRepository.getEmployeeByRole(role_id);
     }
 
 

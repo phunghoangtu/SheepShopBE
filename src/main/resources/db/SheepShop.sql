@@ -4,117 +4,117 @@ USE SheepShop
 GO
 
 CREATE TABLE category (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50),
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                       name NVARCHAR(50) ,
                        description NVARCHAR(max) ,
-                       status	INT DEFAULT 0,
+                       status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE image (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
                        code VARCHAR(255) ,
 )
     GO
 
 CREATE TABLE brand (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50),
+                       name NVARCHAR(50) ,
                        description NVARCHAR(max) ,
-                       status	INT DEFAULT 0,
+                       status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE collar_style (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                        name NVARCHAR(50),
                        description NVARCHAR(max) ,
-                       status	INT DEFAULT 0,
+                       status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE color (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                        name NVARCHAR(50),
                        description NVARCHAR(max) ,
-                       status	INT DEFAULT 0,
+                       status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE size (
                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                       name NVARCHAR(50),
                       description NVARCHAR(max) ,
-                      status	INT DEFAULT 0,
+                      status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE material (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                        name NVARCHAR(50),
                        description NVARCHAR(max) ,
-                       status	INT DEFAULT 0,
+                       status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE product (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       brand_id INT REFERENCES brand(id),
-                       collar_style_id INT REFERENCES collar_style(id),
-                       color_id INT REFERENCES color(id),
-                       size_id INT REFERENCES size(id),
-                       material_id INT REFERENCES material(id),
-                       category_id INT REFERENCES category(id),
-                       image_id INT REFERENCES image(id),
-                       code VARCHAR(30) UNIQUE,
-                       name NVARCHAR(50),
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                       code VARCHAR(30) UNIQUE ,
+                       name NVARCHAR(50) ,
                        quantity INT ,
                        price DECIMAL ,
                        description NVARCHAR(max) ,
-                       status	INT DEFAULT 0,
+                       status	INT DEFAULT 0 ,
+                       brand_id INT REFERENCES brand(id) ,
+                       collar_style_id INT REFERENCES collar_style(id) ,
+                       color_id INT REFERENCES color(id) ,
+                       size_id INT REFERENCES size(id) ,
+                       material_id INT REFERENCES material(id) ,
+                       category_id INT REFERENCES category(id) ,
+                       image_id INT REFERENCES image(id) ,
 )
     GO
 CREATE TABLE customer (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       code VARCHAR(30) UNIQUE,
-                       fullname NVARCHAR(100),
-                       username VARCHAR(50),
-                       password VARCHAR(70),
-                       image VARCHAR(max),
-                       gender BIGINT,
-                       phone VARCHAR(20),
-                       email VARCHAR(100),
-                       status	INT DEFAULT 0,
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                       code VARCHAR(30) UNIQUE ,
+                       fullname NVARCHAR(100) ,
+                       username VARCHAR(50) ,
+                       password VARCHAR(70) ,
+                       image VARCHAR(max) ,
+                       gender BIGINT ,
+                       phone VARCHAR(20) ,
+                       email VARCHAR(100) ,
+                       status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE role (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50),
-					   status	INT DEFAULT 0,
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                       name NVARCHAR(50) ,
+					   status	INT DEFAULT 0 ,
 )
     GO
 CREATE TABLE employee (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       code VARCHAR(30) UNIQUE,
-                       fullname NVARCHAR(100),
-                       username VARCHAR(50) UNIQUE,
-                       password VARCHAR(256),
-                       image VARCHAR(max),
-                       gender BIGINT,
-                       phone VARCHAR(20),
-                       email VARCHAR(100),
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                       code VARCHAR(30) UNIQUE ,
+                       fullname NVARCHAR(100) ,
+                       username VARCHAR(50) UNIQUE ,
+                       password VARCHAR(256) ,
+                       image VARCHAR(max) ,
+                       gender BIGINT ,
+                       phone VARCHAR(20) ,
+                       email VARCHAR(100) ,
                        enabled BIT,
+                       createBy varchar(30) ,
+                       updateBy varchar(30) ,
                        status	INT DEFAULT 0,
-                       createBy varchar(30),
-                       updateBy varchar(30),
-					   role_id INT REFERENCES role(id),
+					   role_id INT REFERENCES role(id) ,
 )
     GO
 
 CREATE TABLE voucher (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       code VARCHAR(30) UNIQUE,
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                       code VARCHAR(30) UNIQUE ,
                        name NVARCHAR(100) ,
                        type_voucher BIT ,
                        discount INT ,
                        Cash DECIMAL ,
                        start_date DATE ,
                        end_date DATE ,
-                       status INT DEFAULT 0,
+                       status INT DEFAULT 0 ,
 )
     GO
 
@@ -134,10 +134,10 @@ CREATE TABLE bill (
     GO
 CREATE TABLE bill_detail (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       bill_id INT REFERENCES bill(id),
-                       product_id INT REFERENCES product(id),
                        quantity INT ,
                        price DECIMAL ,
+                       bill_id INT REFERENCES bill(id),
+                       product_id INT REFERENCES product(id),
 )
     GO
 CREATE TABLE cart (
@@ -147,10 +147,10 @@ CREATE TABLE cart (
     GO
 CREATE TABLE cart_detail (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       cart_id INT REFERENCES bill(id),
-                       product_id INT REFERENCES product(id),
                        quantity INT ,
                        price DECIMAL ,
+                       cart_id INT REFERENCES bill(id),
+                       product_id INT REFERENCES product(id),
 )
     GO
 
@@ -264,8 +264,9 @@ VALUES
 -- Thêm dữ liệu vào bảng "users"
 INSERT INTO employee(code, fullname, username, image, gender, phone, email, enabled, role_id , createBy, updateBy)
 VALUES
-    ('U001', 'John Doe', 'Admin', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin');
-
+    ('U001', 'John Doe', 'sa', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin'),
+	('U002', 'Test', 'Test', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin'),
+	('U003', 'Hoàng Tú', 'Admin', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin');
 
 -- Thêm dữ liệu vào bảng "voucher"
 INSERT INTO voucher (code, name, type_voucher, discount, Cash, start_date, end_date, status)

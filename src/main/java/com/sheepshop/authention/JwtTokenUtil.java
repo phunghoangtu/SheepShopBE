@@ -12,7 +12,7 @@ import java.util.Date;
 public class JwtTokenUtil {
 
     private static final String SECRET_KEY = "concuakicuc";
-    private static final long EXPIRATION_TIME = 864_000_000; // 10 days
+    private static final long EXPIRATION_TIME = 86_400_000; // 1 day
 
     @Autowired
     CustomerService service;

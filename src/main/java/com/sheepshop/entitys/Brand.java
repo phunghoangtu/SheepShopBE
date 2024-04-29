@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Size(max = 50)
     @Nationalized
@@ -38,6 +37,6 @@ public class Brand {
 
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
-    private Set<Product> products = new HashSet<Product>();
+    private Set<Product> products = new LinkedHashSet<>();
 
 }

@@ -99,6 +99,8 @@ CREATE TABLE employee (
                        email VARCHAR(100),
                        enabled BIT,
                        status	INT DEFAULT 0,
+                       createBy varchar(30),
+                       updateBy varchar(30),
 					   role_id INT REFERENCES role(id),
 )
     GO
@@ -257,13 +259,12 @@ VALUES
 -- Thêm dữ liệu vào bảng "role"
 INSERT INTO role (name)
 VALUES
-    ('ADMIN');
+    ('Admin');
 
 -- Thêm dữ liệu vào bảng "users"
-INSERT INTO employee(code, fullname, username, image, gender, phone, email, enabled, role_id)
+INSERT INTO employee(code, fullname, username, image, gender, phone, email, enabled, role_id , createBy, updateBy)
 VALUES
-    ('U001', 'John Doe', 'Admin', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1);
-
+    ('U001', 'John Doe', 'Admin', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin');
 
 
 -- Thêm dữ liệu vào bảng "voucher"

@@ -14,19 +14,5 @@ public class CollarStyleService {
     private CollarStyleRepository collarStyleRepository;
 
 
-    public List<CollarStyle> getCollarStyleList() {
-        return collarStyleRepository.findAll();
-    }
-
-
-    public CollarStyle findById(Long id) {
-        return collarStyleRepository.findById(id).get();
-    }
-
-
-    public void save(CollarStyle collarStyle) {
-            collarStyleRepository.save(collarStyle);
-    }
-
 
 }

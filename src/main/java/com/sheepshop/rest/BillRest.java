@@ -25,7 +25,7 @@ public class BillRest {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBillById(@PathVariable Long id) {
+    public ResponseEntity<?> deleteBillById(@PathVariable Integer id) {
         // Xóa bản ghi
         return ResponseEntity.ok(billService.deleteBillById(id));
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BillRepository extends JpaRepository<Bill, Long>{
+public interface BillRepository extends JpaRepository<Bill, Integer>{
 
     @Query(value = "Select p from Bill p where p.payStatus = 0")
     List<Bill> getBillChuaThanhToan();

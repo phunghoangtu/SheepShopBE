@@ -14,15 +14,8 @@ import java.util.Optional;
 @Service
 public class BillService {
 
-
     @Autowired
     private BillRepository billRepository;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private CustomerRepository customerRepository;
 
     public List<Bill> getBillChuaThanhToan() {
         return billRepository.getBillChuaThanhToan();
@@ -43,7 +36,7 @@ public class BillService {
         return billRepository.save(bill);
     }
 
-    public Bill deleteBillById(Long id) {
+    public Bill deleteBillById(Integer id) {
         Optional<Bill> billOptional = billRepository.findById(id);
         return billOptional.map(o-> {
             billRepository.delete(o);

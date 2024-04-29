@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Size(max = 30)
     @Column(name = "code", length = 30)
@@ -65,8 +64,16 @@ public class Employee {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @Size(max = 30)
+    @Column(name = "createBy", length = 30)
+    private String createBy;
+
+    @Size(max = 30)
+    @Column(name = "updateBy", length = 30)
+    private String updateBy;
+
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
-    private Set<Bill> bills = new HashSet<Bill>();
+    private Set<Bill> bills = new LinkedHashSet<>();
 
 }

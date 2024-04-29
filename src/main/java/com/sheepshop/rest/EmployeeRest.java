@@ -24,7 +24,7 @@ public class EmployeeRest {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Long id){
+    public ResponseEntity<?> getById(@PathVariable("id") Integer id){
         return ResponseEntity.ok(employeeService.getById(id));
     }
 
@@ -35,7 +35,7 @@ public class EmployeeRest {
 
 
     @GetMapping("/filter")
-    public ResponseEntity<?> getAllByFilter(@RequestParam(name = "idRole",required = false) Long idRole){
+    public ResponseEntity<?> getAllByFilter(@RequestParam(name = "idRole",required = false) Integer idRole){
         return ResponseEntity.ok(employeeService.getAllByFilter(idRole));
     }
 

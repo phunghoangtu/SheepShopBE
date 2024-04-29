@@ -9,7 +9,6 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -21,7 +20,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -77,10 +76,10 @@ public class Product {
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")
-    private Set<BillDetail> billDetails = new HashSet<BillDetail>();
+    private Set<BillDetail> billDetails = new LinkedHashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")
-    private Set<CartDetail> cartDetails = new HashSet<CartDetail>();
+    private Set<CartDetail> cartDetails = new LinkedHashSet<>();
 
 }

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Size(max = 255)
     @Column(name = "code")
@@ -26,6 +25,6 @@ public class Image {
 
     @JsonIgnore
     @OneToMany(mappedBy = "image")
-    private Set<Product> products = new HashSet<Product>();
+    private Set<Product> products = new LinkedHashSet<>();
 
 }

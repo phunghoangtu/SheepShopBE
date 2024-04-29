@@ -21,8 +21,8 @@ public class ProductRest {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable("id") String id) {
-        Product product = productService.findById(Long.valueOf(id));
+    public ResponseEntity<?> getProductById(@PathVariable("id") Integer id) {
+        Product product = productService.findById(id);
         if (product != null) {
             return ResponseEntity.ok(product);
         } else {

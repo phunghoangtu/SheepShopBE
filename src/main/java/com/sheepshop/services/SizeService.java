@@ -13,16 +13,6 @@ public class SizeService {
     @Autowired
     private SizeRepository sizeRepository;
 
-    public List<Size> getSizeList() {
-        return sizeRepository.findAll();
-    }
 
-    public Size findById(Long id) {
-        return sizeRepository.findById(id).get();
-    }
-
-    public void save(Size size) {
-        sizeRepository.save(size);
-    }
 
 }

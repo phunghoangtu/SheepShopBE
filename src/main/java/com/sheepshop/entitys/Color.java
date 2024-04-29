@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -38,6 +37,6 @@ public class Color {
 
     @JsonIgnore
     @OneToMany(mappedBy = "color")
-    private Set<Product> products = new HashSet<Product>();
+    private Set<Product> products = new LinkedHashSet<>();
 
 }

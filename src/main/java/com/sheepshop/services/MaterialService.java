@@ -14,18 +14,6 @@ public class MaterialService {
     private MaterialRepository materialRepository;
 
 
-    public List<Material> getMaterialList() {
-        return materialRepository.findAll();
-    }
 
-
-    public Material findById(Long id) {
-        return materialRepository.findById(id).get();
-    }
-
-
-    public void save(Material material) {
-        materialRepository.save(material);
-    }
 
 }

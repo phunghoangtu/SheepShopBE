@@ -13,20 +13,6 @@ public class RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public List<Role> getAll() {
-        return roleRepository.findAll();
-    }
 
-    public void save(Role role) {
-        roleRepository.save(role);
-    }
-
-    public Role findByName(String name) {
-        return roleRepository.findByName(name);
-    }
-
-    public Role findById(Long id) {
-        return roleRepository.findById(id).get();
-    }
 
 }

@@ -14,24 +14,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
 
-    public List<Category> getCategoryList() {
-        return categoryRepository.findAll();
-    }
 
-
-    public Category findById(Long id) {
-        return categoryRepository.findById(id).get();
-    }
-
-
-    public void save(Category category) {
-        categoryRepository.save(category);
-    }
-
-
-    public List<Category> getAllAPI() {
-        return categoryRepository.getAllAPI();
-    }
 
 
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long>{
+public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
     @Query(value = "Select c from Category c where c.status = 0")
     List<Category> getAllAPI();

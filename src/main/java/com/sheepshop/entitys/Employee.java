@@ -56,14 +56,6 @@ public class Employee {
     @Column(name = "enabled")
     private Boolean enabled;
 
-    @ColumnDefault("0")
-    @Column(name = "status")
-    private Integer status;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
     @Size(max = 30)
     @Column(name = "createBy", length = 30)
     private String createBy;
@@ -71,6 +63,14 @@ public class Employee {
     @Size(max = 30)
     @Column(name = "updateBy", length = 30)
     private String updateBy;
+
+    @ColumnDefault("0")
+    @Column(name = "status")
+    private Integer status;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @JsonIgnore
     @OneToMany(mappedBy = "employee")

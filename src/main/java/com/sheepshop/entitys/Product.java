@@ -22,6 +22,30 @@ public class Product {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Size(max = 30)
+    @Column(name = "code", length = 30)
+    private String code;
+
+    @Size(max = 50)
+    @Nationalized
+    @Column(name = "name", length = 50)
+    private String name;
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "price", precision = 18)
+    private BigDecimal price;
+
+    @Nationalized
+    @Lob
+    @Column(name = "description")
+    private String description;
+
+    @ColumnDefault("0")
+    @Column(name = "status")
+    private Integer status;
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
@@ -49,30 +73,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "image_id")
     private Image image;
-
-    @Size(max = 30)
-    @Column(name = "code", length = 30)
-    private String code;
-
-    @Size(max = 50)
-    @Nationalized
-    @Column(name = "name", length = 50)
-    private String name;
-
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "price", precision = 18)
-    private BigDecimal price;
-
-    @Nationalized
-    @Lob
-    @Column(name = "description")
-    private String description;
-
-    @ColumnDefault("0")
-    @Column(name = "status")
-    private Integer status;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")

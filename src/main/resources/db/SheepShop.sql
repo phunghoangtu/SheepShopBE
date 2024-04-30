@@ -124,9 +124,10 @@ CREATE TABLE bill (
                        payment_date DATETIME2 ,
                        total_price DECIMAL ,
                        total_price_last DECIMAL ,
-                       pay_type  INT ,
-                       pay_status INT default 0,
+                       pay_type  INT ,                    
                        code_ghn VARCHAR(30) ,
+					   pay_status INT ,
+					   status INT ,
                        employee_id INT REFERENCES employee(id),
                        voucher_id INT REFERENCES voucher(id),
                        customer_id INT REFERENCES customer(id),
@@ -149,7 +150,7 @@ CREATE TABLE cart_detail (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
                        quantity INT ,
                        price DECIMAL ,
-                       cart_id INT REFERENCES bill(id),
+                       cart_id INT REFERENCES cart(id),
                        product_id INT REFERENCES product(id),
 )
     GO
@@ -278,13 +279,13 @@ VALUES
     ('V005', 'Summer Promotion', 1, 30, 150.00, '2024-06-01', '2024-08-31', 0);
 
 -- Thêm dữ liệu vào bảng "bill"
-INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, pay_status, code_ghn, employee_id, voucher_id, customer_id)
+INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, code_ghn, pay_status, status, employee_id, voucher_id, customer_id)
 VALUES
-    ('B001', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B002', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B003', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B004', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1),
-	('B005', GETDATE() , 500.00, 500.00 , 1, 0 , 'GHNCODE001' , 1, 1, 1);
+    ('B001', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
+	('B002', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
+	('B003', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
+	('B004', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
+	('B005', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 , 1, 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill_detail"
 INSERT INTO bill_detail (bill_id, product_id, quantity, price)

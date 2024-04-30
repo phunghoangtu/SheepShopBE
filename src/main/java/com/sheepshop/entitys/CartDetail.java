@@ -16,18 +16,18 @@ public class CartDetail {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Bill cart;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "price", precision = 18)
     private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 }

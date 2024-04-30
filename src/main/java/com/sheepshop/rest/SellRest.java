@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/bill/paystatus")
-public class BillRest {
+@RequestMapping("/api/bill/billTaiQuay")
+public class SellRest {
 
     @Autowired
     private BillService billService;

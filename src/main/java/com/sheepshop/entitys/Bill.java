@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -38,13 +37,15 @@ public class Bill {
     @Column(name = "pay_type")
     private Integer payType;
 
-    @ColumnDefault("0")
-    @Column(name = "pay_status")
-    private Integer payStatus;
-
     @Size(max = 30)
     @Column(name = "code_ghn", length = 30)
     private String codeGhn;
+
+    @Column(name = "pay_status")
+    private Integer payStatus;
+
+    @Column(name = "status")
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")

@@ -11,31 +11,31 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "cart_detail")
+@Table(name = "Cart_Detail")
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
-    @Column(name = "unit_price")
+    @Column(name = "UnitPrice")
     private BigDecimal unitPrice;
 
-    @Column(name = "quantity")
+    @Column(name = "Quantity")
     private Integer quantity;
 
-    @Column(name = "color_id")
-    private Integer colorId;
+    @Column(name = "IdColor")
+    private Integer idColor;
 
-    @Column(name = "size_id")
-    private Integer sizeId;
+    @Column(name = "IdSize")
+    private Integer idSize;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "IdCart")
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "product_detail_id")
+    @JoinColumn(name = "IdProductDetail")
     private ProductDetail productDetail;
 
 }

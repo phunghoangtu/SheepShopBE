@@ -7,7 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,55 +17,54 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "voucher")
 public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 30)
-    @Column(name = "code", length = 30)
+    @Column(name = "Code", length = 30)
     private String code;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "name", length = 100)
+    @Column(name = "Name", length = 100)
     private String name;
 
-    @Column(name = "type_voucher")
+    @Column(name = "TypeVoucher")
     private Boolean typeVoucher;
 
-    @Column(name = "is_voucher")
+    @Column(name = "IsVoucher")
     private Boolean isVoucher;
 
-    @Column(name = "discount")
+    @Column(name = "Discount")
     private Integer discount;
 
-    @Column(name = "cash")
+    @Column(name = "Cash")
     private BigDecimal cash;
 
-    @Column(name = "start_date")
-    private Instant startDate;
+    @Column(name = "StartDate")
+    private Date startDate;
 
-    @Column(name = "end_date")
-    private Instant endDate;
+    @Column(name = "EndDate")
+    private Date endDate;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @JsonIgnore

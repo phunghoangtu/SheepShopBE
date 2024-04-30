@@ -20,7 +20,7 @@ import java.util.Map;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/auth/admin")
-public class AuthController1 {
+public class AuthEmployeeController {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;

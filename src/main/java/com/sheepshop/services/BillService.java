@@ -9,6 +9,7 @@ import com.sheepshop.repositorys.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,7 +24,7 @@ public class BillService {
 
     private String getNextCode() {
         String biggestMa = billRepository.getBiggestMa();
-        int currentCode = 1;
+        int currentCode = 0;
         if (biggestMa != null && biggestMa.length() > 2) {
             currentCode = Integer.parseInt(biggestMa.substring(2));
         }
@@ -34,11 +35,13 @@ public class BillService {
     public Bill addBillTaiQuay(BillTaiQuayRequest request){
         Bill bill = new Bill();
         bill.setCode(getNextCode());
-        bill.setPayStatus(request.getPayStatus());
+        bill.setPurchaseDate(new Date());
+        bill.setTypeStatus(request.getTypeStatus());
         bill.setStatus(request.getStatus());
-        bill.setEmployee(Employee.builder().id(request.getEmployee()).build());
+        bill.setEmployee(Employee.builder().id(request.getIdEmployee()).build());
         return billRepository.save(bill);
     }
+
 
 
 

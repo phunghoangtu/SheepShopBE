@@ -13,15 +13,14 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "IdCustomer")
     private Customer customer;
 
     @JsonIgnore

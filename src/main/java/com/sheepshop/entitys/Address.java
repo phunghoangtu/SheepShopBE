@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,16 +16,15 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "fullname", length = 100)
+    @Column(name = "Fullname", length = 100)
     private String fullname;
 
     @Size(max = 20)
@@ -34,52 +33,52 @@ public class Address {
 
     @Size(max = 255)
     @Nationalized
-    @Column(name = "address")
+    @Column(name = "Address")
     private String address;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "city_name", length = 100)
+    @Column(name = "CityName", length = 100)
     private String cityName;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "district_name", length = 100)
+    @Column(name = "DistrictName", length = 100)
     private String districtName;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "ward_name", length = 100)
+    @Column(name = "WardName", length = 100)
     private String wardName;
 
-    @Column(name = "city_id")
-    private Integer cityId;
+    @Column(name = "IdCity")
+    private Integer idCity;
 
-    @Column(name = "district_id")
-    private Integer districtId;
+    @Column(name = "IdDistrict")
+    private Integer idDistrict;
 
-    @Column(name = "ward_id")
-    private Integer wardId;
+    @Column(name = "IdWard")
+    private Integer idWard;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "IdCustomer")
     private Customer customer;
 
     @JsonIgnore

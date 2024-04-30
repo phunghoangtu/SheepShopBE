@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/bill/billTaiQuay")
+@RequestMapping("/api/bill")
 public class SellRest {
 
     @Autowired
@@ -28,6 +28,14 @@ public class SellRest {
         return ResponseEntity.ok(billService.addBillTaiQuay(request));
     }
 
+    @GetMapping("/getallbybill/{code}")
+    public ResponseEntity<?> getallbybill(@PathVariable("code") String code){
+        return ResponseEntity.ok(billDetailService.getAllbyBill(code));
+    }
 
+    @GetMapping("/getallbyproduct/{id}")
+    public ResponseEntity<?> getallbyproduct(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(billDetailService.getAllByIdProduct(id));
+    }
 
 }

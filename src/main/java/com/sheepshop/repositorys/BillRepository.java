@@ -12,14 +12,16 @@ import java.util.List;
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Integer>{
 
-
-
     @Query(value = "select code from bill b order by len(b.code) desc, b.code desc offset 0 row fetch next 1 row only", nativeQuery = true)
     String getBiggestMa();
 
-    @Query(value = "Select b.id , b.code , b.totalPrice,b.status, b.payStatus from Bill b \n" +
-            "where b.status = :status order by b.purchaseDate desc")
+    @Query(value =
+            "SELECT b.Id, b.Code, b.PurchaseDate, b.EstimatedDate, b.PaymentDate, b.DeliveryDate, " +
+                    "b.TotalPrice, b.ShipPrice, b.TotalPriceLast, b.Note, b.PayType, b.PayStatus, b.TypeStatus, " +
+                    "b.Status, b.CodeGHN, b.IdCoupon, b.IdAddress, b.IdEmployee, b.IdVoucher, b.IdCustomer " +
+                    "FROM Bill b WHERE b.Status = :status ORDER BY b.PurchaseDate DESC", nativeQuery = true)
     List<BillResponse> getBillByStatus(@Param("status") Integer status);
+
 
 
 }

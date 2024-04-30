@@ -6,7 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,50 +14,49 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "coupon")
 public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 30)
-    @Column(name = "code", length = 30)
+    @Column(name = "Code", length = 30)
     private String code;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "name", length = 100)
+    @Column(name = "Name", length = 100)
     private String name;
 
-    @Column(name = "is_type")
+    @Column(name = "IsType")
     private Boolean isType;
 
-    @Column(name = "discount")
+    @Column(name = "Discount")
     private Integer discount;
 
-    @Column(name = "cash")
+    @Column(name = "Cash")
     private BigDecimal cash;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "IdCustomer")
     private Customer customer;
 
 }

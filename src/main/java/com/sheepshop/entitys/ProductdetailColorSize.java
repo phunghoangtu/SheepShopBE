@@ -9,26 +9,26 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "product_detail_color_size")
-public class ProductDetailColorSize {
+@Table(name = "ProductDetail_Color_Size")
+public class ProductdetailColorSize {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "product_detail_id")
+    @JoinColumn(name = "IdProductDetail")
     private ProductDetail productDetail;
 
     @ManyToOne
-    @JoinColumn(name = "color_id")
+    @JoinColumn(name = "IdColor")
     private Color color;
 
     @ManyToOne
-    @JoinColumn(name = "size_id")
+    @JoinColumn(name = "IdSize")
     private Size size;
 
-    @Column(name = "quantity")
+    @Column(name = "Quantity")
     private Integer quantity;
 
 }

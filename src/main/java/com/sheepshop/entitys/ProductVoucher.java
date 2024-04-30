@@ -9,19 +9,19 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "product_voucher")
+@Table(name = "Product_Voucher")
 public class ProductVoucher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "voucher_id")
+    @JoinColumn(name = "IdVoucher")
     private Voucher voucher;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "IdProduct")
     private Product product;
 
 }

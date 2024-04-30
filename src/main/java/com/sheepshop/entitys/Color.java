@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,42 +16,41 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "color")
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "name", length = 100)
+    @Column(name = "Name", length = 100)
     private String name;
 
     @Size(max = 255)
     @Nationalized
-    @Column(name = "description")
+    @Column(name = "Description")
     private String description;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @JsonIgnore
     @OneToMany(mappedBy = "color")
-    private Set<ProductDetailColorSize> productDetailColorSizes = new LinkedHashSet<>();
+    private Set<ProductdetailColorSize> productdetailColorSizes = new LinkedHashSet<>();
 
 }

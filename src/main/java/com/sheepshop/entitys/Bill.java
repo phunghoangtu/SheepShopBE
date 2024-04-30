@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,84 +18,92 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "bill")
+@Table(name = "Bill")
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 30)
-    @Column(name = "code", length = 30)
+    @Column(name = "Code", length = 30)
     private String code;
 
-    @Column(name = "purchase_date")
-    private Instant purchaseDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "PurchaseDate")
+    private Date purchaseDate;
 
-    @Column(name = "estimated_date")
-    private Instant estimatedDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "EstimatedDate")
+    private Date estimatedDate;
 
-    @Column(name = "payment_date")
-    private Instant paymentDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "PaymentDate")
+    private Date paymentDate;
 
-    @Column(name = "delyvery_date")
-    private Instant delyveryDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DeliveryDate")
+    private Date deliveryDate;
 
-    @Column(name = "total_price")
+    @Column(name = "TotalPrice")
     private BigDecimal totalPrice;
 
-    @Column(name = "ship_price")
+    @Column(name = "ShipPrice")
     private BigDecimal shipPrice;
 
-    @Column(name = "total_price_last")
+    @Column(name = "TotalPriceLast")
     private BigDecimal totalPriceLast;
 
     @Size(max = 255)
     @Nationalized
-    @Column(name = "note")
+    @Column(name = "Note")
     private String note;
 
-    @Column(name = "pay_type")
+    @Column(name = "PayType")
     private Integer payType;
 
-    @Column(name = "pay_status")
+    @Column(name = "PayStatus")
     private Integer payStatus;
 
-    @Column(name = "type_status")
+    @Column(name = "TypeStatus")
     private Integer typeStatus;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @Size(max = 30)
     @Column(name = "CodeGHN", length = 30)
     private String codeGHN;
 
-    @Column(name = "coupon_id")
-    private Integer couponId;
+    @Column(name = "IdCoupon")
+    private Integer idCoupon;
 
     @ManyToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "IdAddress")
     private Address address;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "IdEmployee")
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "voucher_id")
+    @JoinColumn(name = "IdVoucher")
     private Voucher voucher;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "IdCustomer")
     private Customer customer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "bill")
     private Set<BillDetail> billDetails = new LinkedHashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "bill")
     private Set<BillHistory> billHistories = new LinkedHashSet<>();
 
 }

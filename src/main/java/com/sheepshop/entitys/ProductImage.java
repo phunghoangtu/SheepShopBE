@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,39 +12,39 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "product_image")
+@Table(name = "Product_Image")
 public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 255)
-    @Column(name = "url")
+    @Column(name = "Url")
     private String url;
 
-    @Column(name = "main_image")
+    @Column(name = "MainImage")
     private Boolean mainImage;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "IdProduct")
     private Product product;
 
 }

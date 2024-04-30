@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,60 +16,59 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
     @Size(max = 30)
-    @Column(name = "code", length = 30)
+    @Column(name = "Code", length = 30)
     private String code;
 
     @Size(max = 100)
     @Nationalized
-    @Column(name = "fullname", length = 100)
+    @Column(name = "Fullname", length = 100)
     private String fullname;
 
     @Size(max = 50)
-    @Column(name = "username", length = 50)
+    @Column(name = "Username", length = 50)
     private String username;
 
     @Size(max = 64)
-    @Column(name = "password", length = 64)
+    @Column(name = "Password", length = 64)
     private String password;
 
     @Size(max = 255)
-    @Column(name = "image")
+    @Column(name = "Image")
     private String image;
 
-    @Column(name = "gender")
+    @Column(name = "Gender")
     private Integer gender;
 
     @Size(max = 20)
-    @Column(name = "phone", length = 20)
+    @Column(name = "Phone", length = 20)
     private String phone;
 
     @Size(max = 100)
-    @Column(name = "email", length = 100)
+    @Column(name = "Email", length = 100)
     private String email;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @JsonIgnore

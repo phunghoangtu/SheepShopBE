@@ -8,6 +8,7 @@ import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,62 +18,62 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "product_detail")
+@Table(name = "Product_Detail")
 public class ProductDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "Id", nullable = false)
     private Integer id;
 
-    @Column(name = "price")
+    @Column(name = "Price")
     private BigDecimal price;
 
-    @Column(name = "discount")
+    @Column(name = "Discount")
     private Integer discount;
 
-    @Column(name = "discount_date")
+    @Column(name = "DiscountDate")
     private Instant discountDate;
 
     @Size(max = 255)
     @Nationalized
-    @Column(name = "description")
+    @Column(name = "Description")
     private String description;
 
-    @Column(name = "create_date")
-    private Instant createDate;
+    @Column(name = "CreateDate")
+    private Date createDate;
 
-    @Column(name = "update_date")
-    private Instant updateDate;
+    @Column(name = "UpdateDate")
+    private Date updateDate;
 
     @Size(max = 30)
-    @Column(name = "create_by", length = 30)
+    @Column(name = "CreateBy", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "update_by", length = 30)
+    @Column(name = "UpdateBy", length = 30)
     private String updateBy;
 
-    @Column(name = "status")
+    @Column(name = "Status")
     private Integer status;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "IdProduct")
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "IdBrand")
     private Brand brand;
 
     @ManyToOne
-    @JoinColumn(name = "collar_style_id")
+    @JoinColumn(name = "IdCollarStyle")
     private CollarStyle collarStyle;
 
     @ManyToOne
-    @JoinColumn(name = "material_id")
+    @JoinColumn(name = "IdMaterial")
     private Material material;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "IdCategory")
     private Category category;
 
     @JsonIgnore
@@ -82,5 +83,13 @@ public class ProductDetail {
     @JsonIgnore
     @OneToMany(mappedBy = "productDetail")
     private Set<CartDetail> cartDetails = new LinkedHashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productDetail")
+    private Set<ProductdetailColorSize> productdetailColorSizes = new LinkedHashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productDetail")
+    private Set<ProductFault> productFaults = new LinkedHashSet<>();
 
 }

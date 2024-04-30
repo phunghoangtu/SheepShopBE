@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BillTaiQuayRequest {
-
-    private Integer IdEmployee;
+public class BillHistoryRequest {
+    private String CreateBy;
+    private String Note;
     private Integer Status;
-    private Integer TypeStatus;
-    
+    private Integer IdBill;
 }

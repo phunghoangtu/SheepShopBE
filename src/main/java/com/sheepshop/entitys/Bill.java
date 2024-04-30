@@ -3,14 +3,17 @@ package com.sheepshop.entitys;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -25,27 +28,54 @@ public class Bill {
     @Column(name = "code", length = 30)
     private String code;
 
+    @Column(name = "purchase_date")
+    private Instant purchaseDate;
+
+    @Column(name = "estimated_date")
+    private Instant estimatedDate;
+
     @Column(name = "payment_date")
     private Instant paymentDate;
 
-    @Column(name = "total_price", precision = 18)
+    @Column(name = "delyvery_date")
+    private Instant delyveryDate;
+
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @Column(name = "total_price_last", precision = 18)
+    @Column(name = "ship_price")
+    private BigDecimal shipPrice;
+
+    @Column(name = "total_price_last")
     private BigDecimal totalPriceLast;
+
+    @Size(max = 255)
+    @Nationalized
+    @Column(name = "note")
+    private String note;
 
     @Column(name = "pay_type")
     private Integer payType;
 
-    @Size(max = 30)
-    @Column(name = "code_ghn", length = 30)
-    private String codeGhn;
-
     @Column(name = "pay_status")
     private Integer payStatus;
 
+    @Column(name = "type_status")
+    private Integer typeStatus;
+
     @Column(name = "status")
     private Integer status;
+
+    @Size(max = 30)
+    @Column(name = "CodeGHN", length = 30)
+    private String codeGHN;
+
+    @Column(name = "coupon_id")
+    private Integer couponId;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -60,11 +90,11 @@ public class Bill {
     private Customer customer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "bill")
+    @OneToMany(mappedBy = "order")
     private Set<BillDetail> billDetails = new LinkedHashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cart")
-    private Set<CartDetail> cartDetails = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "order")
+    private Set<BillHistory> billHistories = new LinkedHashSet<>();
 
 }

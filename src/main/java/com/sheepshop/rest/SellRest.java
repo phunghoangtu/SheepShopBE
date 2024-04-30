@@ -1,6 +1,7 @@
 package com.sheepshop.rest;
 
-import com.sheepshop.entitys.Bill;
+import com.sheepshop.model.req.BillTaiQuayRequest;
+import com.sheepshop.services.BillDetailService;
 import com.sheepshop.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,20 +15,19 @@ public class SellRest {
     @Autowired
     private BillService billService;
 
-    @GetMapping
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(billService.getBillChuaThanhToan());
+    @Autowired
+    private BillDetailService billDetailService;
+
+    @GetMapping("/getbystatus/{status}")
+    public ResponseEntity<?> getbystatus(@PathVariable("status") Integer status){
+        return ResponseEntity.ok(billService.getAllByStatus(status));
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addBill(@RequestBody Bill bill) {
-        return ResponseEntity.ok(billService.addBill(bill));
+    @PostMapping("/billTaiQuay")
+    public ResponseEntity<?> billTaiQuay(@RequestBody BillTaiQuayRequest request){
+        return ResponseEntity.ok(billService.addBillTaiQuay(request));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBillById(@PathVariable Integer id) {
-        // Xóa bản ghi
-        return ResponseEntity.ok(billService.deleteBillById(id));
-    }
+
 
 }

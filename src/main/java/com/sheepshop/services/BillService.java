@@ -2,14 +2,14 @@ package com.sheepshop.services;
 
 
 import com.sheepshop.entitys.Bill;
+import com.sheepshop.entitys.Employee;
+import com.sheepshop.model.req.BillTaiQuayRequest;
+import com.sheepshop.model.resp.BillResponse;
 import com.sheepshop.repositorys.BillRepository;
-import com.sheepshop.repositorys.CustomerRepository;
-import com.sheepshop.repositorys.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BillService {
@@ -17,8 +17,8 @@ public class BillService {
     @Autowired
     private BillRepository billRepository;
 
-    public List<Bill> getBillChuaThanhToan() {
-        return billRepository.getBillChuaThanhToan();
+    public List<BillResponse> getAllByStatus(Integer status){
+        return billRepository.getBillByStatus(status);
     }
 
     private String getNextCode() {
@@ -31,18 +31,15 @@ public class BillService {
         return newCode;
     }
 
-    public Bill addBill(Bill bill) {
+    public Bill addBillTaiQuay(BillTaiQuayRequest request){
+        Bill bill = new Bill();
         bill.setCode(getNextCode());
+        bill.setPayStatus(request.getPayStatus());
+        bill.setStatus(request.getStatus());
+        bill.setEmployee(Employee.builder().id(request.getEmployee()).build());
         return billRepository.save(bill);
     }
 
-    public Bill deleteBillById(Integer id) {
-        Optional<Bill> billOptional = billRepository.findById(id);
-        return billOptional.map(o-> {
-            billRepository.delete(o);
-            return o;
-        }).orElse(null);
-    }
 
 
 

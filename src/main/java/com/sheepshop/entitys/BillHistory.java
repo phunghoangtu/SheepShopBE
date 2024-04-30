@@ -1,14 +1,11 @@
 package com.sheepshop.entitys;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,26 +13,17 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "bill_history")
+public class BillHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 30)
-    @Column(name = "code", length = 30)
-    private String code;
-
-    @Size(max = 100)
-    @Nationalized
-    @Column(name = "name", length = 100)
-    private String name;
-
     @Size(max = 255)
     @Nationalized
-    @Column(name = "description")
-    private String description;
+    @Column(name = "note")
+    private String note;
 
     @Column(name = "create_date")
     private Instant createDate;
@@ -54,16 +42,8 @@ public class Product {
     @Column(name = "status")
     private Integer status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductDetail> productDetails = new LinkedHashSet<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductImage> productImages = new LinkedHashSet<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductVoucher> productVouchers = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Bill order;
 
 }

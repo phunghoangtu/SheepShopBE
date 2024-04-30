@@ -3,14 +3,16 @@ package com.sheepshop.entitys;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -34,16 +36,16 @@ public class Employee {
     @Column(name = "username", length = 50)
     private String username;
 
-    @Size(max = 256)
-    @Column(name = "password", length = 256)
+    @Size(max = 64)
+    @Column(name = "password", length = 64)
     private String password;
 
-    @Lob
+    @Size(max = 255)
     @Column(name = "image")
     private String image;
 
     @Column(name = "gender")
-    private Long gender;
+    private Integer gender;
 
     @Size(max = 20)
     @Column(name = "phone", length = 20)
@@ -56,15 +58,20 @@ public class Employee {
     @Column(name = "enabled")
     private Boolean enabled;
 
+    @Column(name = "create_date")
+    private Instant createDate;
+
+    @Column(name = "update_date")
+    private Instant updateDate;
+
     @Size(max = 30)
-    @Column(name = "createBy", length = 30)
+    @Column(name = "create_by", length = 30)
     private String createBy;
 
     @Size(max = 30)
-    @Column(name = "updateBy", length = 30)
+    @Column(name = "update_by", length = 30)
     private String updateBy;
 
-    @ColumnDefault("0")
     @Column(name = "status")
     private Integer status;
 

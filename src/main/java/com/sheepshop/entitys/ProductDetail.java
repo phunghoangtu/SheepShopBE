@@ -17,39 +17,26 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "voucher")
-public class Voucher {
+@Table(name = "product_detail")
+public class ProductDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 30)
-    @Column(name = "code", length = 30)
-    private String code;
-
-    @Size(max = 100)
-    @Nationalized
-    @Column(name = "name", length = 100)
-    private String name;
-
-    @Column(name = "type_voucher")
-    private Boolean typeVoucher;
-
-    @Column(name = "is_voucher")
-    private Boolean isVoucher;
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Column(name = "discount")
     private Integer discount;
 
-    @Column(name = "cash")
-    private BigDecimal cash;
+    @Column(name = "discount_date")
+    private Instant discountDate;
 
-    @Column(name = "start_date")
-    private Instant startDate;
-
-    @Column(name = "end_date")
-    private Instant endDate;
+    @Size(max = 255)
+    @Nationalized
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "create_date")
     private Instant createDate;
@@ -68,12 +55,32 @@ public class Voucher {
     @Column(name = "status")
     private Integer status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "voucher")
-    private Set<Bill> bills = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "collar_style_id")
+    private CollarStyle collarStyle;
+
+    @ManyToOne
+    @JoinColumn(name = "material_id")
+    private Material material;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "voucher")
-    private Set<ProductVoucher> productVouchers = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "productDetail")
+    private Set<BillDetail> billDetails = new LinkedHashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productDetail")
+    private Set<CartDetail> cartDetails = new LinkedHashSet<>();
 
 }

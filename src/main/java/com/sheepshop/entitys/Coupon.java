@@ -1,6 +1,5 @@
 package com.sheepshop.entitys;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -8,8 +7,6 @@ import org.hibernate.annotations.Nationalized;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,8 +14,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "voucher")
-public class Voucher {
+@Table(name = "coupon")
+public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -33,23 +30,14 @@ public class Voucher {
     @Column(name = "name", length = 100)
     private String name;
 
-    @Column(name = "type_voucher")
-    private Boolean typeVoucher;
-
-    @Column(name = "is_voucher")
-    private Boolean isVoucher;
+    @Column(name = "is_type")
+    private Boolean isType;
 
     @Column(name = "discount")
     private Integer discount;
 
     @Column(name = "cash")
     private BigDecimal cash;
-
-    @Column(name = "start_date")
-    private Instant startDate;
-
-    @Column(name = "end_date")
-    private Instant endDate;
 
     @Column(name = "create_date")
     private Instant createDate;
@@ -68,12 +56,8 @@ public class Voucher {
     @Column(name = "status")
     private Integer status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "voucher")
-    private Set<Bill> bills = new LinkedHashSet<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "voucher")
-    private Set<ProductVoucher> productVouchers = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 }

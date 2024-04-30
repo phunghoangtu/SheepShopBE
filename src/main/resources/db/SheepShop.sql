@@ -3,291 +3,404 @@ GO
 USE SheepShop
 GO
 
-CREATE TABLE category (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       name NVARCHAR(50) ,
-                       description NVARCHAR(max) ,
-                       status	INT DEFAULT 0 ,
-)
-    GO
-CREATE TABLE image (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       code VARCHAR(255) ,
-)
-    GO
-
-CREATE TABLE brand (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50) ,
-                       description NVARCHAR(max) ,
-                       status	INT DEFAULT 0 ,
-)
-    GO
-CREATE TABLE collar_style (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50),
-                       description NVARCHAR(max) ,
-                       status	INT DEFAULT 0 ,
-)
-    GO
-CREATE TABLE color (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50),
-                       description NVARCHAR(max) ,
-                       status	INT DEFAULT 0 ,
-)
-    GO
-CREATE TABLE size (
-                      id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                      name NVARCHAR(50),
-                      description NVARCHAR(max) ,
-                      status	INT DEFAULT 0 ,
-)
-    GO
-CREATE TABLE material (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       name NVARCHAR(50),
-                       description NVARCHAR(max) ,
-                       status	INT DEFAULT 0 ,
-)
-    GO
-CREATE TABLE product (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       code VARCHAR(30) UNIQUE ,
-                       name NVARCHAR(50) ,
-                       quantity INT ,
-                       price DECIMAL ,
-                       description NVARCHAR(max) ,
-                       status	INT DEFAULT 0 ,
-                       brand_id INT REFERENCES brand(id) ,
-                       collar_style_id INT REFERENCES collar_style(id) ,
-                       color_id INT REFERENCES color(id) ,
-                       size_id INT REFERENCES size(id) ,
-                       material_id INT REFERENCES material(id) ,
-                       category_id INT REFERENCES category(id) ,
-                       image_id INT REFERENCES image(id) ,
-)
-    GO
-CREATE TABLE customer (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       code VARCHAR(30) UNIQUE ,
-                       fullname NVARCHAR(100) ,
-                       username VARCHAR(50) ,
-                       password VARCHAR(70) ,
-                       image VARCHAR(max) ,
-                       gender BIGINT ,
-                       phone VARCHAR(20) ,
-                       email VARCHAR(100) ,
-                       status	INT DEFAULT 0 ,
-)
-    GO
 CREATE TABLE role (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       name NVARCHAR(50) ,
-					   status	INT DEFAULT 0 ,
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(50),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+					     status INT,
 )
     GO
 CREATE TABLE employee (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       code VARCHAR(30) UNIQUE ,
-                       fullname NVARCHAR(100) ,
-                       username VARCHAR(50) UNIQUE ,
-                       password VARCHAR(256) ,
-                       image VARCHAR(max) ,
-                       gender BIGINT ,
-                       phone VARCHAR(20) ,
-                       email VARCHAR(100) ,
-                       enabled BIT,
-                       createBy varchar(30) ,
-                       updateBy varchar(30) ,
-                       status	INT DEFAULT 0,
-					   role_id INT REFERENCES role(id) ,
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                         code VARCHAR(30) UNIQUE,
+                         fullname NVARCHAR(100),
+                         username VARCHAR(50) UNIQUE,
+                         password VARCHAR(64),
+                         image VARCHAR(255),
+                         gender INT,
+                         phone VARCHAR(20),
+                         email VARCHAR(100),
+                         enabled BIT,
+                         create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status	INT ,
+					     role_id INT FOREIGN KEY REFERENCES role(id) ,
 )
     GO
-
+CREATE TABLE customer (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                         code VARCHAR(30) UNIQUE,
+                         fullname NVARCHAR(100),
+                         username VARCHAR(50) UNIQUE,
+                         password VARCHAR(64),
+                         image VARCHAR(255),
+                         gender INT,
+                         phone VARCHAR(20),
+                         email VARCHAR(100),
+					     create_date DATETIME,
+				 	     update_date DATETIME,
+				   	     create_by VARCHAR(30),
+				  	     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
+CREATE TABLE category (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(100),
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
+CREATE TABLE brand (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(100),
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
+CREATE TABLE color (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(100),
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
+CREATE TABLE size (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(100),
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
+CREATE TABLE material (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(100),
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
+CREATE TABLE collar_style (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         name NVARCHAR(100),
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+)
+    GO
 CREATE TABLE voucher (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
-                       code VARCHAR(30) UNIQUE ,
-                       name NVARCHAR(100) ,
-                       type_voucher BIT ,
-                       discount INT ,
-                       Cash DECIMAL ,
-                       start_date DATE ,
-                       end_date DATE ,
-                       status INT DEFAULT 0 ,
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         code VARCHAR(30) UNIQUE,
+                         name NVARCHAR(100),
+                         type_voucher BIT,
+					     is_voucher BIT,
+                         discount INT,
+                         cash MONEY,
+                         start_date DATETIME,
+                         end_date DATETIME,
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
 )
     GO
-
+CREATE TABLE product (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         code VARCHAR(30),
+                         name NVARCHAR(100),                   
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status	INT ,                                  
+)
+    GO
+CREATE TABLE product_detail (
+					     id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         price MONEY,
+						 discount int ,
+                         discount_date DATETIME,
+                         description NVARCHAR(255),
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status	INT ,            
+					     product_id INT FOREIGN KEY REFERENCES product(id),	   
+					     brand_id INT FOREIGN KEY REFERENCES brand(id),      
+					     collar_style_id INT FOREIGN KEY REFERENCES collar_style(id),
+						 material_id INT FOREIGN KEY REFERENCES material(id),   
+                         category_id INT FOREIGN KEY REFERENCES category(id),   
+)
+    GO
+CREATE TABLE product_image (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         url VARCHAR(255),
+					     main_image bit,
+					     create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+					     status INT,
+					     product_id INT FOREIGN KEY REFERENCES product(id)
+)
+    GO
+CREATE TABLE product_fault (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         note nvarchar(255),
+                         color_id INT,
+                         size_id INT,
+					     collar_style_id INT,
+                         quantity INT ,
+                         product_detail_id INT FOREIGN KEY REFERENCES product_detail(id),
+)
+	GO
+CREATE TABLE product_detail_color_size (
+                         Id int identity(1,1) not null primary key,
+                         product_detail_id INT FOREIGN KEY REFERENCES product_detail(id),
+                         color_id int foreign key references color(id),
+                         size_id int foreign key references size(id),
+                         quantity INT,
+)
+	GO
+CREATE TABLE product_voucher(
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                         voucher_id INT FOREIGN KEY REFERENCES voucher(id),
+                         product_id INT FOREIGN KEY REFERENCES product(id),
+)
+	GO
+CREATE TABLE address (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY ,
+                         fullname NVARCHAR(100),
+                         Phone VARCHAR(20),
+                         address NVARCHAR(255),
+                         city_name NVARCHAR(100),
+                         district_name NVARCHAR(100),
+                         ward_name NVARCHAR(100),
+                         city_id INT,
+                         district_id INT,
+                         ward_id INT,
+                         create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status int,
+                         customer_id INT FOREIGN KEY REFERENCES customer(id),
+)
+	GO
+CREATE TABLE coupon (
+                         id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                         code VARCHAR(30),
+                         name NVARCHAR(100),
+                         is_type BIT,
+                         discount INT,
+                         cash MONEY,
+                         create_date DATETIME,
+					     update_date DATETIME,
+					     create_by VARCHAR(30),
+					     update_by VARCHAR(30),
+                         status INT,
+                         customer_id INT FOREIGN KEY REFERENCES customer(id)
+)
+	GO
 CREATE TABLE bill (
-                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       code VARCHAR(30) UNIQUE,
-                       payment_date DATETIME2 ,
-                       total_price DECIMAL ,
-                       total_price_last DECIMAL ,
-                       pay_type  INT ,                    
-                       code_ghn VARCHAR(30) ,
-					   pay_status INT ,
-					   status INT ,
-                       employee_id INT REFERENCES employee(id),
-                       voucher_id INT REFERENCES voucher(id),
-                       customer_id INT REFERENCES customer(id),
+                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                        code VARCHAR(30) UNIQUE,
+						purchase_date DATETIME,
+                        estimated_date DATETIME,
+						payment_date DATETIME,
+						delyvery_date DATETIME,
+						total_price MONEY,
+						ship_price MONEY,
+						total_price_last MONEY,
+						note NVARCHAR(255),
+						pay_type INT,
+						pay_status INT,
+						type_status INT,
+						status INT,
+						CodeGHN varchar(30),
+						coupon_id INT,
+						address_id INT FOREIGN KEY REFERENCES address(id),
+                        employee_id INT FOREIGN KEY REFERENCES employee(id),
+                        voucher_id INT FOREIGN KEY REFERENCES voucher(id),
+                        customer_id INT FOREIGN KEY REFERENCES customer(id),
 )
     GO
 CREATE TABLE bill_detail (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       quantity INT ,
-                       price DECIMAL ,
-                       bill_id INT REFERENCES bill(id),
-                       product_id INT REFERENCES product(id),
+					   unit_price MONEY,     
+					   quantity INT,
+                       color_id INT,
+                       size_id INT,
+                       order_id INT FOREIGN KEY REFERENCES bill(id),
+                       product_detail_id INT FOREIGN KEY REFERENCES product_detail(id),                                        
 )
     GO
+CREATE TABLE bill_history (
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                       note nvarchar(255),
+                       create_date DATETIME,
+					   update_date DATETIME,
+					   create_by VARCHAR(30),
+					   update_by VARCHAR(30),
+                       status INT,
+                       order_id INT FOREIGN KEY REFERENCES bill(id),
+)
+	GO
 CREATE TABLE cart (
-                       id INT IDENTITY(1,1) PRIMARY KEY,
-                       customer_id INT REFERENCES customer(id),
+                       id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                       customer_id INT FOREIGN KEY REFERENCES customer(id),
 )
     GO
 CREATE TABLE cart_detail (
                        id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                       quantity INT ,
-                       price DECIMAL ,
-                       cart_id INT REFERENCES cart(id),
-                       product_id INT REFERENCES product(id),
+					   unit_price MONEY,     
+					   quantity INT,
+                       color_id INT,
+                       size_id INT,
+                       cart_id INT FOREIGN KEY REFERENCES cart(id),
+                       product_detail_id INT FOREIGN KEY REFERENCES product_detail(id),
 )
-    GO
+	GO
 
--- Thêm dữ liệu vào bảng "category"
-INSERT INTO category (name, description, status)
-VALUES
-    ('Category 1', 'Description 1', 0),
-    ('Category 2', 'Description 2', 0),
-    ('Category 3', 'Description 3', 0),
-    ('Category 4', 'Description 4', 0),
-    ('Category 5', 'Description 5', 0);
 
--- Thêm dữ liệu vào bảng "image"
-INSERT INTO image (code)
-VALUES
-    ('images1.jpg'),
-    ('images2.jpg'),
-    ('images3.jpg'),
-    ('images4.jpg'),
-    ('images5.jpg');
 
--- Thêm dữ liệu vào bảng "brand"
-INSERT INTO brand (name, description, status)
-VALUES
-    ('Brand 1', 'Description 1', 0),
-    ('Brand 2', 'Description 2', 0),
-    ('Brand 3', 'Description 3', 0),
-    ('Brand 4', 'Description 4', 0),
-    ('Brand 5', 'Description 5', 0);
-
--- Thêm dữ liệu vào bảng "collar_style"
-INSERT INTO collar_style (name, description, status)
-VALUES
-    ('Collar Style 1', 'Description 1', 0),
-    ('Collar Style 2', 'Description 2', 0),
-    ('Collar Style 3', 'Description 3', 0),
-    ('Collar Style 4', 'Description 4', 0),
-    ('Collar Style 5', 'Description 5', 0);
-
--- Thêm dữ liệu vào bảng "color"
-INSERT INTO color (name, description, status)
-VALUES
-    ('Color 1', 'Description 1', 0),
-    ('Color 2', 'Description 2', 0),
-    ('Color 3', 'Description 3', 0),
-    ('Color 4', 'Description 4', 0),
-    ('Color 5', 'Description 5', 0);
-
--- Thêm dữ liệu vào bảng "size"
-INSERT INTO size (name, description, status)
-VALUES
-    ('Size 1', 'Description 1', 0),
-    ('Size 2', 'Description 2', 0),
-    ('Size 3', 'Description 3', 0),
-    ('Size 4', 'Description 4', 0),
-    ('Size 5', 'Description 5', 0);
-
--- Thêm dữ liệu vào bảng "material"
-INSERT INTO material (name, description, status)
-VALUES
-    ('Material 1', 'Description 1', 0),
-    ('Material 2', 'Description 2', 0),
-    ('Material 3', 'Description 3', 0),
-    ('Material 4', 'Description 4', 0),
-    ('Material 5', 'Description 5', 0);
-
--- Thêm dữ liệu vào bảng "product_detail"
-INSERT INTO product
-(brand_id, collar_style_id, color_id, size_id, material_id, category_id, image_id, code, name, quantity, price, description, status)
-VALUES
-    (1, 1, 1, 1, 1, 1, 1, 'CODE1', 'Product 1', 10, 19.99, 'Description 1', 0),
-    (1, 1, 1, 1, 1, 1, 2, 'CODE2', 'Product 2', 50, 29.99, 'Description 2', 0),
-    (1, 1, 1, 1, 1, 1, 3, 'CODE3', 'Product 3', 10, 39.99, 'Description 3', 0),
-    (1, 1, 1, 1, 1, 1, 4, 'CODE4', 'Product 4', 10, 49.99, 'Description 4', 0),
-    (1, 1, 1, 1, 1, 1, 5, 'CODE5', 'Product 5', 10, 59.99, 'Description 5', 0),
-    (2, 2, 2, 2, 2, 2, 1, 'CODE6', 'Product 6', 10, 19.99, 'Description 6', 0),
-    (2, 2, 2, 2, 2, 2, 2, 'CODE7', 'Product 7', 50, 29.99, 'Description 7', 0),
-    (2, 2, 2, 2, 2, 2, 3, 'CODE8', 'Product 8', 10, 39.99, 'Description 8', 0),
-    (2, 2, 2, 2, 2, 2, 4, 'CODE9', 'Product 9', 10, 49.99, 'Description 9', 0),
-    (2, 2, 2, 2, 2, 2, 5, 'CODE10', 'Product 10', 1, 59.99, 'Description 10', 0),
-    (3, 3, 3, 3, 3, 3, 1, 'CODE11', 'Product 11', 1, 19.99, 'Description 11', 0),
-    (3, 3, 3, 3, 3, 3, 2, 'CODE12', 'Product 12', 5, 29.99, 'Description 12', 0),
-    (3, 3, 3, 3, 3, 3, 3, 'CODE13', 'Product 13', 1, 39.99, 'Description 13', 0),
-    (3, 3, 3, 3, 3, 3, 4, 'CODE14', 'Product 14', 1, 49.99, 'Description 14', 0),
-    (3, 3, 3, 3, 3, 3, 5, 'CODE15', 'Product 15', 1, 59.99, 'Description 15', 0),
-    (4, 4, 4, 4, 4, 4, 1, 'CODE16', 'Product 16', 1, 19.99, 'Description 16', 0),
-    (4, 4, 4, 4, 4, 4, 2, 'CODE17', 'Product 17', 5, 29.99, 'Description 17', 0),
-    (4, 4, 4, 4, 4, 4, 3, 'CODE18', 'Product 18', 1, 39.99, 'Description 18', 0),
-    (4, 4, 4, 4, 4, 4, 4, 'CODE19', 'Product 19', 1, 49.99, 'Description 19', 0),
-    (4, 4, 4, 4, 4, 4, 5, 'CODE20', 'Product 20', 1, 59.99, 'Description 20', 0),
-    (5, 5, 5, 5, 5, 5, 1, 'CODE21', 'Product 21', 1, 19.99, 'Description 21', 0),
-    (5, 5, 5, 5, 5, 5, 2, 'CODE22', 'Product 22', 5, 29.99, 'Description 22', 0),
-    (5, 5, 5, 5, 5, 5, 3, 'CODE23', 'Product 23', 1, 39.99, 'Description 23', 0),
-    (5, 5, 5, 5, 5, 5, 4, 'CODE24', 'Product 24', 1, 49.99, 'Description 24', 0),
-    (5, 5, 5, 5, 5, 5, 5, 'CODE25', 'Product 25', 1, 59.99, 'Description 25', 0);
 
 -- Thêm dữ liệu vào bảng "customer"
-INSERT INTO customer (code, fullname, image, gender, phone, email, status)
-VALUES
-    ('C001', 'John Doe', 'image1.jpg', 1, '123456789', 'johndoe@example.com', 0),
-    ('C002', 'Jane Smith', 'image2.jpg', 2, '987654321', 'janesmith@example.com', 0),
-    ('C003', 'Michael Johnson', 'image3.jpg', 1, '456789123', 'michaeljohnson@example.com', 0),
-    ('C004', 'Emily Davis', 'image4.jpg', 2, '321654987', 'emilydavis@example.com', 0),
-    ('C005', 'David Wilson', 'image5.jpg', 1, '789123456', 'davidwilson@example.com', 0);
+INSERT INTO customer (code, fullname, username, password, image, gender, phone, email, create_date, update_date, create_by, update_by, status)
+VALUES ('Customer Code', 'Full Name', 'username', '123456', 'Image URL', 1, '0123456789', 'customer@example.com', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "role"
-INSERT INTO role (name)
-VALUES
-    ('Admin');
+INSERT INTO role (name, create_date, update_date, create_by, update_by, status)
+VALUES ('Admin', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
--- Thêm dữ liệu vào bảng "users"
-INSERT INTO employee(code, fullname, username, image, gender, phone, email, enabled, role_id , createBy, updateBy)
-VALUES
-    ('U001', 'John Doe', 'sa', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin'),
-	('U002', 'Test', 'Test', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin'),
-	('U003', 'Hoàng Tú', 'Admin', 'image1.jpg', 0, '0123456789', 'johndoe@example.com', 1, 1 , 'Admin', 'Admin');
+-- Thêm dữ liệu vào bảng "employee"
+INSERT INTO employee (code, fullname, username, password, image, gender, phone, email, enabled, create_date, update_date, create_by, update_by, status, role_id)
+VALUES ('Employee Code', 'John Doe', 'sa', '123456', 'Image URL', 1, '0123456789', 'employee@example.com', 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1);
+
+-- Thêm dữ liệu vào bảng "category"
+INSERT INTO category (name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('Category 1', 'Category 1 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Category 2', 'Category 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Category 3', 'Category 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "brand"
+INSERT INTO brand (name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('Brand 1', 'Brand 1 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Brand 2', 'Brand 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Brand 3', 'Brand 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "collar_style"
+INSERT INTO collar_style (name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('Collar Style 1', 'Collar Style 1description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Collar Style 2', 'Collar Style 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Collar Style 3', 'Collar Style 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "color"
+INSERT INTO color (name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('Color 1', 'Color 1 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Color 2', 'Color 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Color 3', 'Color 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "size"
+INSERT INTO size (name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('Size 1', 'Size 1 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Size 2', 'Size 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Size 3', 'Size 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "material"
+INSERT INTO material (name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('Material 1', 'Material 1 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Material 2', 'Material 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Material 3', 'Material 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "voucher"
-INSERT INTO voucher (code, name, type_voucher, discount, Cash, start_date, end_date, status)
-VALUES
-    ('V001', 'First Time Discount', 1, 10, 50.00, '2024-01-01', '2024-12-31', 0),
-    ('V002', 'Holiday Special', 0, 20, 100.00, '2024-12-01', '2025-01-15', 0),
-    ('V003', 'New Year Sale', 1, 15, 75.00, '2024-12-25', '2025-01-05', 0),
-    ('V004', 'Birthday Gift', 0, 25, 125.00, '2024-03-01', '2024-03-31', 0),
-    ('V005', 'Summer Promotion', 1, 30, 150.00, '2024-06-01', '2024-08-31', 0);
+INSERT INTO voucher (code, name, type_voucher, is_voucher, discount, cash, start_date, end_date, create_date, update_date, create_by, update_by, status)
+VALUES ('VOUCHER001', 'Voucher 1', 1, 1, 10, 0, '2024-04-30', '2024-05-31', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('VOUCHER002', 'Voucher 2', 0, 1, 0, 50.00, '2024-04-30', '2024-06-30', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "product"
+INSERT INTO product (code, name, description, create_date, update_date, create_by, update_by, status)
+VALUES ('P001', 'Product 1', 'Product 1 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('P002', 'Product 2', 'Product 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('P003', 'Product 3', 'Product 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+
+-- Thêm dữ liệu vào bảng "product_detail"
+INSERT INTO product_detail (price, discount, discount_date, description, create_date, update_date, create_by, update_by, status, product_id, brand_id, collar_style_id, material_id, category_id)
+VALUES (99.99, 10, '2024-04-30', 'Product 1 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1, 1, 1, 1, 1),
+       (149.99, 20, '2024-04-30', 'Product 2 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 2, 2, 2, 2, 2),
+       (199.99, 30, '2024-04-30', 'Product 3 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3, 3, 3, 3, 3);
+
+-- Thêm dữ liệu vào bảng "product_image"
+INSERT INTO product_image (url, main_image, create_date, update_date, create_by, update_by, status, product_id)
+VALUES ('image_url_1', 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1),
+       ('image_url_2', 0, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 2),
+       ('image_url_3', 0, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3);
+
+-- Thêm dữ liệu vào bảng "product_fault"
+INSERT INTO product_fault (note, color_id, size_id, collar_style_id, quantity, product_detail_id)
+VALUES ('Fault 1', 1, 1, 1, 5, 1),
+       ('Fault 2', 2, 2, 2, 3, 2),
+       ('Fault 3', 3, 3, 3, 2, 3);
+
+-- Thêm dữ liệu vào bảng "product_detail_color_size"
+INSERT INTO product_detail_color_size (product_detail_id, color_id, size_id, quantity)
+VALUES (1, 1, 1, 10),
+       (2, 2, 2, 5),
+       (3, 3, 3, 8);
+
+-- Thêm dữ liệu vào bảng "product_voucher"
+INSERT INTO product_voucher (voucher_id, product_id)
+VALUES (1, 1),
+       (2, 2);
+
+-- Thêm dữ liệu vào bảng "address"
+INSERT INTO address (fullname, Phone, address, city_name, district_name, ward_name, city_id, district_id, ward_id, create_date, update_date, create_by, update_by, status, customer_id)
+VALUES ('John Doe', '123456789', '123 Main Street', 'City', 'District', 'Ward', 1, 1, 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1),
+       ('Jane Doe', '987654321', '456 Elm Street', 'City', 'District', 'Ward', 2, 2, 2, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1);
+
+-- Thêm dữ liệu vào bảng "coupon"
+INSERT INTO coupon (code, name, is_type, discount, cash, create_date, update_date, create_by, update_by, status, customer_id)
+VALUES ('COUPON001', 'Coupon 1', 1, 10, 0, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 1, 1),
+       ('COUPON002', 'Coupon 2', 0, 0, 50.00, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill"
-INSERT INTO bill (code, payment_date, total_price, total_price_last, pay_type, code_ghn, pay_status, status, employee_id, voucher_id, customer_id)
-VALUES
-    ('B001', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
-	('B002', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
-	('B003', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
-	('B004', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 ,1, 1, 1),
-	('B005', GETDATE() , 500.00, 500.00 , 1  , 'GHNCODE001' ,1 ,10 , 1, 1, 1);
+INSERT INTO bill (code, purchase_date, estimated_date, payment_date, delyvery_date, total_price, ship_price, total_price_last, note, pay_type, pay_status, type_status, status, CodeGHN, coupon_id, address_id, employee_id, voucher_id, customer_id)
+VALUES ('BILL001', '2024-04-30', '2024-05-01', '2024-05-02', '2024-05-03', 100.00, 10.00, 110.00, 'Note 1', 1, 1, 1, 10, 'GHN001', 1, 1, 1, 1, 1),
+       ('BILL002', '2024-04-30', '2024-05-01', '2024-05-02', '2024-05-03', 200.00, 20.00, 220.00, 'Note 2', 2, 1, 1, 10, 'GHN002', 1, 1, 1, 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill_detail"
-INSERT INTO bill_detail (bill_id, product_id, quantity, price)
-VALUES
-    (Null, 1, 2, 50.00);
+INSERT INTO bill_detail (unit_price, quantity, color_id, size_id, order_id, product_detail_id)
+VALUES (10.00, 2, 1, 1, 1, 1),
+       (20.00, 3, 2, 2, 2, 1);
+
+

@@ -1,14 +1,10 @@
 package com.sheepshop.entitys;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.Nationalized;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,22 +12,19 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "product_image")
+public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 100)
-    @Nationalized
-    @Column(name = "name", length = 100)
-    private String name;
-
     @Size(max = 255)
-    @Nationalized
-    @Column(name = "description")
-    private String description;
+    @Column(name = "url")
+    private String url;
+
+    @Column(name = "main_image")
+    private Boolean mainImage;
 
     @Column(name = "create_date")
     private Instant createDate;
@@ -50,8 +43,8 @@ public class Category {
     @Column(name = "status")
     private Integer status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "category")
-    private Set<ProductDetail> productDetails = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 }

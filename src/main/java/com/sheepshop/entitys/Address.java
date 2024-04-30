@@ -16,26 +16,50 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "address")
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 30)
-    @Column(name = "code", length = 30)
-    private String code;
-
     @Size(max = 100)
     @Nationalized
-    @Column(name = "name", length = 100)
-    private String name;
+    @Column(name = "fullname", length = 100)
+    private String fullname;
+
+    @Size(max = 20)
+    @Column(name = "Phone", length = 20)
+    private String phone;
 
     @Size(max = 255)
     @Nationalized
-    @Column(name = "description")
-    private String description;
+    @Column(name = "address")
+    private String address;
+
+    @Size(max = 100)
+    @Nationalized
+    @Column(name = "city_name", length = 100)
+    private String cityName;
+
+    @Size(max = 100)
+    @Nationalized
+    @Column(name = "district_name", length = 100)
+    private String districtName;
+
+    @Size(max = 100)
+    @Nationalized
+    @Column(name = "ward_name", length = 100)
+    private String wardName;
+
+    @Column(name = "city_id")
+    private Integer cityId;
+
+    @Column(name = "district_id")
+    private Integer districtId;
+
+    @Column(name = "ward_id")
+    private Integer wardId;
 
     @Column(name = "create_date")
     private Instant createDate;
@@ -54,16 +78,12 @@ public class Product {
     @Column(name = "status")
     private Integer status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductDetail> productDetails = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductImage> productImages = new LinkedHashSet<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductVoucher> productVouchers = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "address")
+    private Set<Bill> bills = new LinkedHashSet<>();
 
 }

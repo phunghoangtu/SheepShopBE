@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -32,9 +33,13 @@ public class Category {
     @Column(name = "Description")
     private String description;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CreateDate")
     private Date createDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UpdateDate")
     private Date updateDate;
 

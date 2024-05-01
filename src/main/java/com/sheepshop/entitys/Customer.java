@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -44,7 +45,7 @@ public class Customer {
     private String image;
 
     @Column(name = "Gender")
-    private Integer gender;
+    private Boolean gender;
 
     @Size(max = 20)
     @Column(name = "Phone", length = 20)
@@ -54,9 +55,13 @@ public class Customer {
     @Column(name = "Email", length = 100)
     private String email;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CreateDate")
     private Date createDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UpdateDate")
     private Date updateDate;
 

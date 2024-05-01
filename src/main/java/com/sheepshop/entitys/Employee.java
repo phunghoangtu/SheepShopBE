@@ -17,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +46,7 @@ public class Employee {
     private String image;
 
     @Column(name = "Gender")
-    private Integer gender;
+    private Boolean gender;
 
     @Size(max = 20)
     @Column(name = "Phone", length = 20)

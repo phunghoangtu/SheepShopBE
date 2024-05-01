@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
+    @Query(value = "select code from employee e order by len(e.code) desc, e.code desc offset 0 row fetch next 1 row only", nativeQuery = true)
+    String getBiggestMa();
+
     @Query(value = "Select e from Employee e where e.status = 0")
     List<Employee> getAll();
 

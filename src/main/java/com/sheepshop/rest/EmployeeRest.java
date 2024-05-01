@@ -1,9 +1,17 @@
 package com.sheepshop.rest;
 
+import com.sheepshop.model.req.CapNhatProfile;
+import com.sheepshop.model.req.EmployeeRequest;
 import com.sheepshop.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+
+import java.util.List;
 
 
 @CrossOrigin("*")
@@ -38,6 +46,37 @@ public class EmployeeRest {
     public ResponseEntity<?> getAllByFilter(@RequestParam(name = "idRole",required = false) Integer idRole) {
         return ResponseEntity.ok(service.getAllByFilter(idRole));
     }
+
+    @PutMapping("/updateprofile/{id}")
+    public ResponseEntity<?> updateprofile(@PathVariable("id") Integer id, @Valid @RequestBody CapNhatProfile form, BindingResult result){
+        if (result.hasErrors()){
+            List<ObjectError> list = result.getAllErrors();
+            return ResponseEntity.badRequest().body(list);
+        }
+        return ResponseEntity.ok(service.updateprofile(id,form));
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> add(@Valid @RequestBody EmployeeRequest request, BindingResult result){
+        if (result.hasErrors()){
+            List<ObjectError> list = result.getAllErrors();
+            return ResponseEntity.badRequest().body(list);
+        }
+        return ResponseEntity.ok(service.add(request));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Integer Id, @Valid @RequestBody EmployeeRequest request, BindingResult result){
+        if (result.hasErrors()){
+            List<ObjectError> list = result.getAllErrors();
+            return ResponseEntity.badRequest().body(list);
+        }
+        return ResponseEntity.ok(service.update(Id,request));
+    }
+
+
+
+
 
 
 }

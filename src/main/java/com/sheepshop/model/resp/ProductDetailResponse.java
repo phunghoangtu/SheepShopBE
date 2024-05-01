@@ -1,9 +1,13 @@
 package com.sheepshop.model.resp;
 
+import java.math.BigDecimal;
+
 public interface ProductDetailResponse {
     Integer getId();
-    Integer getIdProductDetail();
-    Integer getIdColor();
-    Integer getIdSize();
+    String getCode();
+    String getName();
+    String getNameColor();
+    String getNameSize();
     Integer getQuantity();
+    BigDecimal getPrice();
 }

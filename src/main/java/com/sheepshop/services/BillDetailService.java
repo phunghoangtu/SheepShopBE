@@ -3,6 +3,7 @@ package com.sheepshop.services;
 
 import com.sheepshop.entitys.BillDetail;
 import com.sheepshop.model.resp.BillDaBanResponse;
+import com.sheepshop.model.resp.TKSanPham;
 import com.sheepshop.repositorys.BillDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,9 @@ public class BillDetailService {
         return repository.getAllByIdProduct(id);
     }
 
-
+    public List<TKSanPham> getTKSanPham(){
+        return repository.getTKSanPham();
+    }
 
 
 }

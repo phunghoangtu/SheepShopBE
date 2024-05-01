@@ -4,7 +4,7 @@ package com.sheepshop.services;
 import com.sheepshop.entitys.Bill;
 import com.sheepshop.entitys.Employee;
 import com.sheepshop.model.req.BillTaiQuayRequest;
-import com.sheepshop.model.resp.BillResponse;
+import com.sheepshop.model.resp.*;
 import com.sheepshop.repositorys.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +42,24 @@ public class BillService {
         return billRepository.save(bill);
     }
 
-
-
+    public TKNgay getTKNgay(){
+        return billRepository.getThongKeNgay();
+    }
+    public TKThang getTKThang(){
+        return billRepository.getThongKeThang();
+    }
+    public TKSLThang getTKSLThang(){
+        return billRepository.getThongKeSoLuongThang();
+    }
+    public List<TKSoLuongHD> getTKSoLuongHD(String tungay, String denngay){
+        return billRepository.getTKSoLuongHD(tungay,denngay);
+    }
+    public List<TKSoLuongSanPham> getTKSoLuongSanPham(String tungay, String denngay){
+        return billRepository.getTKSoLuongSanPham(tungay,denngay);
+    }
+    public List<TKHoaDonStatus> getTKSoLuongHDStatus(String tungay, String denngay){
+        return billRepository.getTKSoLuongHDStatus(tungay,denngay);
+    }
 
 
 }

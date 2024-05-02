@@ -3,19 +3,20 @@ package com.sheepshop.entitys;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
-@Table(name = "Bill_Detail")
-public class BillDetail {
+public class BillDetail implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
+    @Column(name = "Id")
     private Integer Id;
 
     @Column(name = "UnitPrice")

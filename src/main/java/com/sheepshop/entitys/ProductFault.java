@@ -5,35 +5,34 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
-@NoArgsConstructor
+import java.io.Serializable;
+
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
-@Table(name = "Product_Fault")
-public class ProductFault {
+public class ProductFault implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
-    private Integer id;
+    @Column(name = "Id")
+    private Integer Id;
 
     @Size(max = 255)
     @Nationalized
     @Column(name = "Note")
-    private String note;
-
-    @Column(name = "Quantity")
-    private Integer quantity;
+    private String Note;
 
     @Column(name = "IdColor")
-    private Integer idColor;
+    private Integer IdColor;
 
     @Column(name = "IdSize")
-    private Integer idSize;
+    private Integer IdSize;
 
-    @Column(name = "IdCollarStyle")
-    private Integer idCollarStyle;
+    @Column(name = "Quantity")
+    private Integer Quantity;
 
     @ManyToOne
     @JoinColumn(name = "IdProductDetail")

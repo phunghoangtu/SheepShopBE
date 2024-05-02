@@ -1,29 +1,28 @@
 package com.sheepshop.entitys;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
-public class Cart {
+public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
-    private Integer id;
+    @Column(name = "Id")
+    private Integer Id;
 
     @ManyToOne
     @JoinColumn(name = "IdCustomer")
     private Customer customer;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "cart")
     private Set<CartDetail> cartDetails = new LinkedHashSet<>();
 

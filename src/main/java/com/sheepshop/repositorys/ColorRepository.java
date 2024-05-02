@@ -10,16 +10,16 @@ import java.util.List;
 
 @Repository
 public interface ColorRepository extends JpaRepository<Color,Integer> {
-    @Query(value = "Select e from Color e where e.status = 0 order by e.createDate desc ")
+    @Query(value = "Select e from Color e where e.Status = 0 order by e.CreateDate desc ")
     List<Color> getAll();
-    @Query(value = "Select e from Color e where e.status = 0 and e.name like :name")
-    public List<Color> searchByName(@Param("name") String name);
-    @Query(value = "select e from Color e where e.id = :id")
-    public Color getById(@Param("id") Integer Id);
-    @Query(value = "Select c.id from Color c\n" +
-            "join ProductdetailColorSize p on p.color.id = c.id \n" +
-            "join ProductDetail pd on pd.id = p.productDetail.id \n" +
-            "where pd.id = :id \n" +
-            "Group by c.id")
-    public List<Integer> getColorByProduct(@Param("id") Integer id);
+    @Query(value = "Select e from Color e where e.Status = 0 and e.Name like :name")
+    List<Color> searchByName(@Param("name") String name);
+    @Query(value = "select e from Color e where e.Id = :id")
+    Color getById(@Param("id") Integer Id);
+    @Query(value = "Select c.Id from Color c\n" +
+            "join ProductdetailColorSize p on p.color.Id = c.Id \n" +
+            "join ProductDetail pd on pd.Id = p.productDetail.Id \n" +
+            "where pd.Id = :id \n" +
+            "Group by c.Id")
+    List<Integer> getColorByProduct(@Param("id") Integer id);
 }

@@ -6,59 +6,61 @@ import lombok.*;
 import org.hibernate.annotations.Nationalized;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
-public class Coupon {
+public class Coupon implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
-    private Integer id;
+    @Column(name = "Id")
+    private Integer Id;
 
     @Size(max = 30)
     @Column(name = "Code", length = 30)
-    private String code;
+    private String Code;
 
     @Size(max = 100)
     @Nationalized
     @Column(name = "Name", length = 100)
-    private String name;
+    private String Name;
 
     @Column(name = "IsType")
-    private Boolean isType;
+    private Boolean IsType;
 
     @Column(name = "Discount")
-    private Integer discount;
+    private Integer Discount;
 
     @Column(name = "Cash")
-    private BigDecimal cash;
+    private BigDecimal Cash;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CreateDate")
-    private Date createDate;
+    private Date CreateDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UpdateDate")
-    private Date updateDate;
+    private Date UpdateDate;
 
     @Size(max = 30)
     @Column(name = "CreateBy", length = 30)
-    private String createBy;
+    private String CreateBy;
 
     @Size(max = 30)
     @Column(name = "UpdateBy", length = 30)
-    private String updateBy;
+    private String UpdateBy;
 
     @Column(name = "Status")
-    private Integer status;
+    private Integer Status;
 
     @ManyToOne
     @JoinColumn(name = "IdCustomer")

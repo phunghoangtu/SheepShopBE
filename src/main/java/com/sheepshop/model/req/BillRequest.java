@@ -1,5 +1,6 @@
 package com.sheepshop.model.req;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +20,5 @@ public class BillRequest {
     private Integer IdCustomer;
     private Integer Status;
     private Integer TypeStatus;
+
 }

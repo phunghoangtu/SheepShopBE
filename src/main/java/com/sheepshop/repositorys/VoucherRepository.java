@@ -12,17 +12,15 @@ import java.util.List;
 
 @Repository
 public interface VoucherRepository extends JpaRepository<Voucher, Integer> {
-
-    @Query(value = "Select e from Voucher e where e.status = 0 or e.status = 1")
+    @Query(value = "Select e from Voucher e where e.Status = 0 or e.Status = 1")
     List<Voucher> getAll();
-    @Query(value = "Select e from Voucher e where e.status = 0 or e.status = 1 and e.name like :name")
+    @Query(value = "Select e from Voucher e where e.Status = 0 or e.Status = 1 and e.Name like :name")
     List<Voucher> searchByName(@Param("name") String name);
-    @Query(value = "select e from Voucher e where e.id = :id")
-    Voucher getById(@Param("id") Integer id);
+    @Query(value = "select e from Voucher e where e.Id = :id")
+    Voucher getById(@Param("id") Integer Id);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE Voucher SET Status = 1 WHERE EndDate <= DATEADD(MINUTE, 1, GETDATE())\n",nativeQuery = true)
     void updateExpensive();
-
 }

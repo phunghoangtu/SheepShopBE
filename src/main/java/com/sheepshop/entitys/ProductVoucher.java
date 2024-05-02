@@ -3,18 +3,21 @@ package com.sheepshop.entitys;
 import jakarta.persistence.*;
 import lombok.*;
 
-@NoArgsConstructor
+import java.io.Serializable;
+
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
 @Table(name = "Product_Voucher")
-public class ProductVoucher {
+public class ProductVoucher implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
-    private Integer id;
+    @Column(name = "Id")
+    private Integer Id;
 
     @ManyToOne
     @JoinColumn(name = "IdVoucher")

@@ -1,29 +1,24 @@
 package com.sheepshop.services;
 
-
-import com.sheepshop.entitys.Bill;
-import com.sheepshop.entitys.Employee;
-import com.sheepshop.model.req.BillTaiQuayRequest;
+import com.sheepshop.entitys.*;
+import com.sheepshop.model.req.*;
 import com.sheepshop.model.resp.*;
 import com.sheepshop.repositorys.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+
 @Service
 public class BillService {
-
     @Autowired
-    private BillRepository billRepository;
+    private BillRepository repository;
 
-    public List<BillResponse> getAllByStatus(Integer status){
-        return billRepository.getBillByStatus(status);
-    }
-
-    private String getNextCode() {
-        String biggestMa = billRepository.getBiggestMa();
+    private String genCode() {
+        String biggestMa = repository.getBiggestMa();
         int currentCode = 0;
         if (biggestMa != null && biggestMa.length() > 2) {
             currentCode = Integer.parseInt(biggestMa.substring(2));
@@ -32,34 +27,148 @@ public class BillService {
         return newCode;
     }
 
+    public Bill add(BillRequest request){
+        Bill bill = new Bill();
+        bill.setCode(genCode());
+        bill.setPurchaseDate(new Date());
+        bill.setNote(request.getNote());
+        bill.setShipPrice(request.getShipPrice());
+        bill.setTotalPrice(request.getTotalPrice());
+        bill.setTotalPriceLast(request.getTotalPriceLast());
+        bill.setPayStatus(request.getPayStatus());
+        bill.setPayType(request.getPayType());
+        bill.setIdCoupon(request.getIdCoupon());
+        bill.setAddress(Address.builder().Id(request.getIdAddress()).build());
+        if(request.getIdCustomer() != -1){
+            bill.setCustomer(Customer.builder().Id(request.getIdCustomer()).build());
+        }
+        bill.setStatus(request.getStatus());
+        bill.setTypeStatus(request.getTypeStatus());
+        return repository.save(bill);
+
+    }
+    public Bill update(String code, BillTaiQuayUpdateRequest request){
+        Bill bill = repository.getByCode(code);
+        bill.setNote(request.getNote());
+        bill.setShipPrice(request.getShipPrice());
+        bill.setTotalPrice(request.getTotalPrice());
+        bill.setTotalPriceLast(request.getTotalPriceLast());
+        bill.setPayStatus(request.getPayStatus());
+        bill.setPayType(request.getPayType());
+        bill.setIdCoupon(request.getIdCoupon());
+       if(request.getIdAddress() != 0){
+           bill.setAddress(Address.builder().Id(request.getIdAddress()).build());
+       }
+        bill.setStatus(request.getStatus());
+        bill.setPaymentDate(request.getPaymentDate());
+        bill.setDelyveryDate(request.getDelyveryDate());
+        if(request.getIdCustomer() != 0){
+            bill.setCustomer(Customer.builder().Id(request.getIdCustomer()).build());
+        }
+        if(request.getIdVoucher() != 0 && request.getIdVoucher() != null){
+            bill.setVoucher(Voucher.builder().Id(request.getIdVoucher()).build());
+        }
+        bill.setTypeStatus(request.getTypeStatus());
+        return repository.save(bill);
+    }
+    public Bill updateStatus(String code, UpdateThanhToanTaiQuay request){
+        Bill bill = repository.getByCode(code);
+
+        bill.setStatus(request.getStatus());
+        bill.setDelyveryDate(request.getDeliveryDate());
+        bill.setPayStatus(request.getPayStatus());
+        bill.setPaymentDate(request.getPaymentDate());
+        return repository.save(bill);
+
+    }
+    public List<BillResponse> getBillFilter(Integer status, Integer payStatus, Integer payType, Integer typeStatus, String tungay, String denngay ){
+        return repository.getBillFilter(status,payStatus,payType,typeStatus,tungay,denngay);
+    }
+    public Bill updateStatus1(String code, UpdateThanhToanTaiQuay request){
+        Bill bill = repository.getByCode(code);
+        bill.setDelyveryDate(new Date());
+        bill.setPayStatus(request.getPayStatus());
+        bill.setPaymentDate(new Date());
+        return repository.save(bill);
+
+    }
+    public Bill updateStatusPay(String code){
+    Bill bill = repository.getByCode(code);
+    bill.setPayStatus(1);
+    bill.setStatus(0);
+    bill.setPaymentDate(new Date());
+    return repository.save(bill);
+    }
+    public Bill updateStatus(UpdateBillStatus updateBillStatus){
+        Bill bill = repository.getByCode(updateBillStatus.getCode());
+        bill.setStatus(updateBillStatus.getStatus());
+        return repository.save(bill);
+    }
+    public Bill updateDiaChi(String Code , Integer IdDiachi){
+        Bill bill = repository.getByCode(Code);
+        bill.setAddress(Address.builder().Id(IdDiachi).build());
+        return repository.save(bill);
+    }
+    public Bill updateTongTien(String Code , BigDecimal money){
+        Bill bill = repository.getByCode(Code);
+        bill.setTotalPrice(money);
+        return repository.save(bill);
+    }
+    public Bill updatePhiShip(UpdateBillShipPrice updateBillShipPrice){
+        Bill bill = repository.getByCode(updateBillShipPrice.getCode());
+        bill.setShipPrice(updateBillShipPrice.getMoney());
+        return repository.save(bill);
+    }
+    public void huyBill(String code){
+        Bill bill = repository.getByCode(code);
+        bill.setStatus(4);
+        repository.save(bill);
+    }
+    public void deleteBill(String code){
+        Bill bill = repository.getByCode(code);
+        repository.delete(bill);
+    }
+    public List<BillResponse> getBillByCustomer(Integer status , Integer idCustomer){
+        return repository.getBillByCustomer(status,idCustomer);
+    }
+    public List<BillAllResponse> getAllBill(){
+        return repository.getAllBill();
+    }
+    public BillResponse getByCode(String code){
+        return repository.getBillBycode(code);
+    }
+    public List<BillResponse> getAllByStatus(Integer status){
+        return repository.getBillByStatus(status);
+    }
     public Bill addBillTaiQuay(BillTaiQuayRequest request){
         Bill bill = new Bill();
-        bill.setCode(getNextCode());
+        bill.setCode(genCode());
         bill.setPurchaseDate(new Date());
         bill.setTypeStatus(request.getTypeStatus());
         bill.setStatus(request.getStatus());
-        bill.setEmployee(Employee.builder().id(request.getIdEmployee()).build());
-        return billRepository.save(bill);
+        bill.setEmployee(Employee.builder().Id(request.getIdEmployee()).build());
+        return repository.save(bill);
+    }
+    public List<BillResponse> getAll(){
+        return repository.getAll();
     }
 
     public TKNgay getTKNgay(){
-        return billRepository.getThongKeNgay();
+        return repository.getThongKeNgay();
     }
     public TKThang getTKThang(){
-        return billRepository.getThongKeThang();
+        return repository.getThongKeThang();
     }
     public TKSLThang getTKSLThang(){
-        return billRepository.getThongKeSoLuongThang();
+        return repository.getThongKeSoLuongThang();
     }
     public List<TKSoLuongHD> getTKSoLuongHD(String tungay, String denngay){
-        return billRepository.getTKSoLuongHD(tungay,denngay);
+        return repository.getTKSoLuongHD(tungay,denngay);
     }
     public List<TKSoLuongSanPham> getTKSoLuongSanPham(String tungay, String denngay){
-        return billRepository.getTKSoLuongSanPham(tungay,denngay);
+        return repository.getTKSoLuongSanPham(tungay,denngay);
     }
     public List<TKHoaDonStatus> getTKSoLuongHDStatus(String tungay, String denngay){
-        return billRepository.getTKSoLuongHDStatus(tungay,denngay);
+        return repository.getTKSoLuongHDStatus(tungay,denngay);
     }
-
-
 }

@@ -1,7 +1,7 @@
 package com.sheepshop.rest;
 
 
-import com.sheepshop.model.resp.ColorRequest;
+import com.sheepshop.model.req.ColorRequest;
 import com.sheepshop.services.ColorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

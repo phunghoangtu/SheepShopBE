@@ -1,4 +1,4 @@
-package com.sheepshop.model.resp;
+package com.sheepshop.model.req;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,6 +1,5 @@
 package com.sheepshop.services;
 
-
 import com.sheepshop.entitys.Bill;
 import com.sheepshop.entitys.BillHistory;
 import com.sheepshop.model.req.BillHistoryRequest;
@@ -23,7 +22,7 @@ public class BillHistoryService {
         billHistory.setStatus(request.getStatus());
         billHistory.setNote(request.getNote());
         billHistory.setCreateBy(request.getCreateBy());
-        billHistory.setBill(Bill.builder().id(request.getIdBill()).build());
+        billHistory.setBill(Bill.builder().Id(request.getIdBill()).build());
         return repository.save(billHistory);
     }
     public List<BillHistoryResponse> getAllByBill(String code){
@@ -37,6 +36,7 @@ public class BillHistoryService {
         for (BillHistory billHistory: list
         ) {
             repository.delete(billHistory);
+
         }
     }
 }

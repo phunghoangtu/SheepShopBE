@@ -1,4 +1,4 @@
-package com.sheepshop.model.resp;
+package com.sheepshop.model.req;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ColorRequest {
+public class CategoryRequest {
     @NotBlank(message = "Tên không được bỏ trống !")
     @Size(max = 100,message = "Tên có độ dài nhỏ hơn hoặc bằng 100 kí tự")
     private String name;

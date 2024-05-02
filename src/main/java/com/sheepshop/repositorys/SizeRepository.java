@@ -10,10 +10,10 @@ import java.util.List;
 
 @Repository
 public interface SizeRepository extends JpaRepository<Size,Integer> {
-    @Query(value = "Select e from Size e where e.status = 0 order by e.createDate desc ")
+    @Query(value = "Select e from Size e where e.Status = 0 order by e.CreateDate desc ")
     List<Size> getAll();
-    @Query(value = "Select e from Size e where e.status = 0 and e.name like :name")
+    @Query(value = "Select e from Size e where e.Status = 0 and e.Name like :name")
     List<Size> searchByName(@Param("name") String name);
-    @Query(value = "select e from Size e where e.id = :id")
+    @Query(value = "select e from Size e where e.Id = :id")
     Size getById(@Param("id") Integer Id);
 }

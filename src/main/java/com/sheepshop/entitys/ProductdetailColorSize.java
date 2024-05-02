@@ -1,24 +1,25 @@
 package com.sheepshop.entitys;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-@NoArgsConstructor
+import java.io.Serializable;
+
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
 @Table(name = "ProductDetail_Color_Size")
-public class ProductdetailColorSize {
+public class ProductdetailColorSize implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
-    private Integer id;
+    @Column(name = "Id")
+    private Integer Id;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "IdProductDetail")
     private ProductDetail productDetail;
 
@@ -31,6 +32,6 @@ public class ProductdetailColorSize {
     private Size size;
 
     @Column(name = "Quantity")
-    private Integer quantity;
+    private Integer Quantity;
 
 }

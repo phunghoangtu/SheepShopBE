@@ -15,7 +15,7 @@ public class JwtTokenUtil {
     private static final long EXPIRATION_TIME = 43_200_000; // 12 hours
 
     @Autowired
-    CustomerService service;
+    private CustomerService service;
 
     // Tạo JWT
     public String generateToken(String username) {

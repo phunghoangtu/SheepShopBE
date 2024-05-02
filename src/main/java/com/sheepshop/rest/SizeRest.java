@@ -1,6 +1,6 @@
 package com.sheepshop.rest;
 
-import com.sheepshop.model.resp.SizeRequest;
+import com.sheepshop.model.req.SizeRequest;
 import com.sheepshop.services.SizeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

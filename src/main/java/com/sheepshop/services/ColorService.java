@@ -1,7 +1,7 @@
 package com.sheepshop.services;
 
 import com.sheepshop.entitys.Color;
-import com.sheepshop.model.resp.ColorRequest;
+import com.sheepshop.model.req.ColorRequest;
 import com.sheepshop.repositorys.ColorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

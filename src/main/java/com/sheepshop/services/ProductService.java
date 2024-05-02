@@ -1,14 +1,13 @@
 package com.sheepshop.services;
 
 import com.sheepshop.entitys.Product;
-import com.sheepshop.model.resp.ProductReqest;
+import com.sheepshop.model.req.ProductReqest;
 import com.sheepshop.repositorys.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Date;
-
 
 @Service
 public class ProductService {

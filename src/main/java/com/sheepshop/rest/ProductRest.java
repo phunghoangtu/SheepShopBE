@@ -1,6 +1,6 @@
 package com.sheepshop.rest;
 
-import com.sheepshop.model.resp.ProductReqest;
+import com.sheepshop.model.req.ProductReqest;
 import com.sheepshop.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

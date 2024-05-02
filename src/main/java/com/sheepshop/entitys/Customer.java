@@ -7,74 +7,75 @@ import lombok.*;
 import org.hibernate.annotations.Nationalized;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
-public class Customer {
+public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
-    private Integer id;
+    @Column(name = "Id")
+    private Integer Id;
 
     @Size(max = 30)
     @Column(name = "Code", length = 30)
-    private String code;
+    private String Code;
 
     @Size(max = 100)
     @Nationalized
     @Column(name = "Fullname", length = 100)
-    private String fullname;
+    private String Fullname;
 
-    @Size(max = 50)
-    @Column(name = "Username", length = 50)
-    private String username;
+    @Size(max = 30)
+    @Column(name = "Username", length = 30)
+    private String Username;
 
-    @Size(max = 64)
-    @Column(name = "Password", length = 64)
-    private String password;
+    @Size(max = 30)
+    @Column(name = "Password", length = 30)
+    private String Password;
 
     @Size(max = 255)
     @Column(name = "Image")
-    private String image;
+    private String Image;
 
     @Column(name = "Gender")
-    private Boolean gender;
+    private Boolean Gender;
 
-    @Size(max = 20)
-    @Column(name = "Phone", length = 20)
-    private String phone;
+    @Size(max = 15)
+    @Column(name = "Phone", length = 15)
+    private String Phone;
 
-    @Size(max = 100)
-    @Column(name = "Email", length = 100)
-    private String email;
+    @Size(max = 50)
+    @Column(name = "Email", length = 50)
+    private String Email;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CreateDate")
-    private Date createDate;
+    private Date CreateDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UpdateDate")
-    private Date updateDate;
+    private Date UpdateDate;
 
     @Size(max = 30)
     @Column(name = "CreateBy", length = 30)
-    private String createBy;
+    private String CreateBy;
 
     @Size(max = 30)
     @Column(name = "UpdateBy", length = 30)
-    private String updateBy;
+    private String UpdateBy;
 
     @Column(name = "Status")
-    private Integer status;
+    private Integer Status;
 
     @JsonIgnore
     @OneToMany(mappedBy = "customer")
@@ -91,5 +92,9 @@ public class Customer {
     @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private Set<Coupon> coupons = new LinkedHashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer")
+    private Set<Rating> ratings = new LinkedHashSet<>();
 
 }

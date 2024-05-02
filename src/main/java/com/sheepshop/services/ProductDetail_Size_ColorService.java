@@ -36,17 +36,15 @@ public class ProductDetail_Size_ColorService {
 
     public ProductdetailColorSize add(ProductDetail_Size_ColorRequest request){
         ProductdetailColorSize productDetail_size_color = new ProductdetailColorSize();
-        productDetail_size_color.setProductDetail(ProductDetail.builder().id(request.getIdProductDetail()).build());
-        productDetail_size_color.setColor(Color.builder().id(request.getIdColor()).build());
-        productDetail_size_color.setSize(Size.builder().id(request.getIdSize()).build());
+        productDetail_size_color.setProductDetail(ProductDetail.builder().Id(request.getIdProductDetail()).build());
+        productDetail_size_color.setColor(Color.builder().Id(request.getIdColor()).build());
+        productDetail_size_color.setSize(Size.builder().Id(request.getIdSize()).build());
         productDetail_size_color.setQuantity(request.getQuantity());
         return repository.save(productDetail_size_color);
     }
-
-
-    public ProductdetailColorSize updateQuantity(Integer IdProduct,Integer IdColor, Integer IdSize,Integer quantity){
-        ProductdetailColorSize productDetail_size_color = repository.getByProductAndColorAndSize(IdProduct,IdColor,IdSize);
-        productDetail_size_color.setQuantity(quantity);
+    public ProductdetailColorSize updateQuantity(Integer id,Integer IdColor, Integer IdSize,Integer quanity){
+        ProductdetailColorSize productDetail_size_color =repository.getByProductAndColorAndSize(id,IdColor,IdSize);
+        productDetail_size_color.setQuantity(quanity);
         return repository.save(productDetail_size_color);
     }
 

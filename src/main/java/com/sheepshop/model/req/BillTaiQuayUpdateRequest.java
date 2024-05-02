@@ -1,5 +1,4 @@
 package com.sheepshop.model.req;
-
 import lombok.Getter;
 import lombok.Setter;
 

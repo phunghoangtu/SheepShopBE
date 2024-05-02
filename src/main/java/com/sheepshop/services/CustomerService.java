@@ -1,24 +1,80 @@
 package com.sheepshop.services;
 
+
 import com.sheepshop.entitys.Customer;
-import com.sheepshop.model.req.CapNhatProfile;
-import com.sheepshop.model.req.ChangeForm;
-import com.sheepshop.model.req.RegisterForm;
+import com.sheepshop.model.req.*;
 import com.sheepshop.repositorys.CustomerRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.time.Instant;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.time.Instant;
 import java.util.Date;
-
+import java.util.List;
 
 @Service
 public class CustomerService {
-
     @Autowired
     private CustomerRepository customerRepository;
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final SecureRandom random = new SecureRandom();
+    // hien thi tat ca
 
+    public List<Customer> getAll(){
+        return customerRepository.getAll();
+    }
 
+    public List<Customer> getAll1(){
+        return customerRepository.getAll1();
+    }
+
+    // Tim khach hang
+    public List<Customer> getAllbyFullName(String fullname){
+        return customerRepository.searchByFullName('%'+fullname+'%');
+    }
+    // add khach hang
+    public Customer add(CustomerReques reques){
+        Customer customer = new Customer();
+        customer.setCode(reques.getCode());
+        customer.setFullname(reques.getFullname());
+        customer.setUsername(reques.getUsername());
+        customer.setPassword(reques.getPassword());
+        customer.setImage(reques.getImage());
+        customer.setGender(reques.getGender());
+        customer.setPhone(reques.getPhone());
+        customer.setEmail(reques.getEmail());
+        customer.setStatus(0);
+        return customerRepository.save(customer);
+    }
+    // update khach hang
+    public  Customer update(Integer id , CustomerReques reques){
+        Customer customer = customerRepository.getById(id);
+        customer.setCode(reques.getCode());
+        customer.setFullname(reques.getFullname());
+        customer.setUsername(reques.getUsername());
+        customer.setPassword(reques.getPassword());
+        customer.setImage(reques.getImage());
+        customer.setGender(reques.getGender());
+        customer.setPhone(reques.getPhone());
+        customer.setEmail(reques.getEmail());
+        customer.setStatus(0);
+        return customerRepository.save(customer);
+    }
+    // xoa khach hang
+    public  Customer delete(Integer id ){
+        Customer customer = customerRepository.getById(id);
+        customer.setStatus(1);
+        return  customerRepository.save(customer);
+    }
+    public  Customer delete1(Integer id ){
+        Customer customer = customerRepository.getById(id);
+        customer.setStatus(0);
+        return  customerRepository.save(customer);
+    }
     // de tai khach hang
     public Customer getById(Integer Id){
         Customer customer = customerRepository.getById(Id);
@@ -26,9 +82,9 @@ public class CustomerService {
     }
     // de tai khach hang
     public Customer getByUsername(String username){
-        return customerRepository.getByUsername(username);
+        Customer customer = customerRepository.getByUsername(username);
+        return customer;
     }
-
     public String genCode(){
         // Tạo đối tượng Random
         long timestamp = Instant.now().getEpochSecond();
@@ -67,7 +123,25 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-
-
+    public static String generateRandomString(int length) {
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(randomIndex);
+            sb.append(randomChar);
+        }
+        return sb.toString();
+    }
+    // quên mật khẩu
+    public Customer forget(ForgetForm form){
+        Customer customer = customerRepository.getByUsername(form.getUsername());
+        customer.setPassword(generateRandomString(8));
+        customer.setUpdateDate(new Date());
+        return customerRepository.save(customer);
+    }
+    //check đk đánh giá
+    public Customer checkdk(Integer IdCustomer ,Integer IdProductDetail){
+        return customerRepository.checkDanhGia(IdCustomer,IdProductDetail);
+    }
 
 }

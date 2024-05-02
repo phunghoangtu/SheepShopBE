@@ -1,8 +1,7 @@
 package com.sheepshop.services;
 
 import com.sheepshop.entitys.Size;
-
-import com.sheepshop.model.resp.SizeRequest;
+import com.sheepshop.model.req.SizeRequest;
 import com.sheepshop.repositorys.SizeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

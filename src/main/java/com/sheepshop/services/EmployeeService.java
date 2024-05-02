@@ -5,79 +5,96 @@ import com.sheepshop.entitys.Role;
 import com.sheepshop.model.req.CapNhatProfile;
 import com.sheepshop.model.req.ChangeForm;
 import com.sheepshop.model.req.EmployeeRequest;
+import com.sheepshop.model.req.ForgetForm;
 import com.sheepshop.repositorys.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class EmployeeService {
-
     @Autowired
     private EmployeeRepository repository;
-
-    @Cacheable(value = "employeeCache", key = "'getAll'")
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final SecureRandom random = new SecureRandom();
     public List<Employee> getAll(){
         return repository.getAll();
     }
-
-    @Cacheable(value = "employeeCache", key = "#id")
-    public Employee getById(Integer id){
-        return repository.getById(id);
+    public List<Employee> getAll1(){
+        return repository.getAll1();
     }
-
-    @Cacheable(value = "employeeCache", key = "#username")
+    public List<Employee> getAllbyName(String name){
+        return repository.searchByName('%'+name+'%');
+    }
+    public Employee add(EmployeeRequest request){
+        Employee employee = new Employee();
+        employee.setCode(request.getCode());
+        employee.setFullname(request.getFullname());
+        employee.setUsername(request.getUsername());
+        employee.setPassword(request.getPassword());
+        employee.setImage(request.getImage());
+        employee.setGender(request.getGender());
+        employee.setPhone(request.getPhone());
+        employee.setEmail(request.getEmail());
+        employee.setStatus(0);
+        employee.setRole(Role.builder().Id(request.getIdRole()).build());
+        return repository.save(employee);
+    }
+    public Employee update(Integer id,EmployeeRequest request){
+        Employee employee = repository.getById(id);
+        employee.setCode(request.getCode());
+        employee.setFullname(request.getFullname());
+        employee.setUsername(request.getUsername());
+        employee.setPassword(request.getPassword());
+        employee.setImage(request.getImage());
+        employee.setGender(request.getGender());
+        employee.setPhone(request.getPhone());
+        employee.setEmail(request.getEmail());
+        employee.setRole(Role.builder().Id(request.getIdRole()).build());
+        return repository.save(employee);
+    }
+    public Employee delete(Integer Id){
+        Employee employee = repository.getById(Id);
+        employee.setStatus(1);
+        return repository.save(employee);
+    }
+    public Employee delete1(Integer Id){
+        Employee employee = repository.getById(Id);
+        employee.setStatus(0);
+        return repository.save(employee);
+    }
+    public Employee getById(Integer Id){
+        Employee employee = repository.getById(Id);
+        return employee;
+    }
     public Employee getByUsername(String username){
         return repository.getByUsername(username);
     }
 
-    @Cacheable(value = "employeeCache", key = "#name")
-    public List<Employee> getAllbyName(String name){
-        return repository.searchByName('%'+name+'%');
-    }
-
-    public List<Employee> getAllByFilter(Integer role_id){
-        return repository.getEmployeeByRole(role_id);
-    }
-
-    private String getNextCode() {
-        String biggestMa = repository.getBiggestMa();
-        int currentCode = 0;
-        if (biggestMa != null && biggestMa.length() > 2) {
-            currentCode = Integer.parseInt(biggestMa.substring(2));
+    public static String generateRandomString(int length) {
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(randomIndex);
+            sb.append(randomChar);
         }
-        String newCode = "NV" + String.format("%02d", currentCode + 1);
-        return newCode;
+        return sb.toString();
     }
-
-    public Employee add(EmployeeRequest request){
-        Employee employee = new Employee();
-        employee.setCode(getNextCode());
-        employee.setFullname(request.getFullname());
-        employee.setUsername(request.getUsername());
-        employee.setPassword(request.getPassword());
-        employee.setImage(request.getImage());
-        employee.setGender(request.getGender());
-        employee.setPhone(request.getPhone());
-        employee.setEmail(request.getEmail());
-        employee.setEnabled(true);
-        employee.setStatus(0);
-        employee.setRole(Role.builder().id(request.getIdRole()).build());
+    // quên mật khẩu
+    public Employee forget(ForgetForm form){
+        Employee employee = repository.getByUsername(form.getUsername());
+        employee.setPassword(generateRandomString(8));
+        employee.setUpdateDate(new Date());
         return repository.save(employee);
     }
-    public Employee update(Integer id, EmployeeRequest request){
-        Employee employee = repository.getById(id);
-        employee.setFullname(request.getFullname());
-        employee.setUsername(request.getUsername());
-        employee.setPassword(request.getPassword());
-        employee.setImage(request.getImage());
-        employee.setGender(request.getGender());
-        employee.setPhone(request.getPhone());
-        employee.setEmail(request.getEmail());
-        employee.setRole(Role.builder().id(request.getIdRole()).build());
+    // đổi mật khẩu
+    public Employee change(Integer idEmployee, ChangeForm form){
+        Employee employee = repository.getById(idEmployee);
+        employee.setPassword(form.getRePasswordMoi());
+        employee.setUpdateDate(new Date());
         return repository.save(employee);
     }
 
@@ -93,12 +110,7 @@ public class EmployeeService {
         return repository.save(employee);
     }
 
-    // đổi mật khẩu
-    public Employee change(Integer idEmployee, ChangeForm form){
-        Employee employee = repository.getById(idEmployee);
-        employee.setPassword(form.getRePasswordMoi());
-        employee.setUpdateDate(new Date());
-        return repository.save(employee);
+    public List<Employee> getAllByFilter(Integer idRole){
+        return repository.getEmployeeByRole(idRole);
     }
-
 }

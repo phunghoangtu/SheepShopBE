@@ -1,295 +1,359 @@
-﻿CREATE DATABASE SheepShop
-GO
-USE SheepShop
-GO
+﻿Create database SheepShop
+go
+use SheepShop
+go
 
-CREATE TABLE Role (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(50),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+create table Role(
+						 Id int identity(1,1) not null primary key,
+						 Name nvarchar(50),
+						 CreateDate Datetime,
+						 UpdateDate Datetime,
+						 CreateBy varchar(30),
+						 UpdateBy varchar(30),
+						 Status int
 
-CREATE TABLE Employee (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Code VARCHAR(30) UNIQUE,
-							Fullname NVARCHAR(100),
-							Username VARCHAR(50) UNIQUE,
-							Password VARCHAR(64),
-							Image VARCHAR(255),
-							Gender BIT,
-							Phone VARCHAR(20),
-							Email VARCHAR(100),
-							Enabled BIT,
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT,
-							IdRole INT FOREIGN KEY REFERENCES Role(Id)
-);
+)
+Create table Employee(
+                         Id int identity(1,1) not null primary key,
+                         Code varchar(30),
+                         Fullname nvarchar(100),
+                         Username varchar(30),
+                         Password varchar(30),
+                         Image varchar(255),
+                         Gender bit,
+                         Phone varchar(15),
+                         Email varchar(50),
+                         CreateDate Datetime,
+                         UpdateDate Datetime,
+                         CreateBy varchar(30),
+                         UpdateBy varchar(30),
+                         Status int,
+                         IdRole int foreign key references Role(Id)
+)
+Create table Customer(
+                         Id int identity(1,1) not null primary key,
+                         Code varchar(30),
+                         Fullname nvarchar(100),
+                         Username varchar(30),
+                         Password varchar(30),
+                         Image varchar(255),
+                         Gender bit,
+                         Phone varchar(15),
+                         Email varchar(50),
+                         CreateDate Datetime,
+                         UpdateDate Datetime,
+                         CreateBy varchar(30),
+                         UpdateBy varchar(30),
+                         Status int
+)
+Create table Coupon(
+                       Id int identity(1,1) not null primary key,
+                       Code varchar(30),
+                       Name nvarchar(100),
+                       IsType bit,
+                       Discount int,
+                       Cash money,
+                       CreateDate Datetime,
+                       UpdateDate Datetime,
+                       CreateBy varchar(30),
+                       UpdateBy varchar(30),
+                       Status int,
+                       IdCustomer int foreign key references Customer(Id)
 
-CREATE TABLE Customer (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Code VARCHAR(30) UNIQUE,
-							Fullname NVARCHAR(100),
-							Username VARCHAR(50) UNIQUE,
-							Password VARCHAR(64),
-							Image VARCHAR(255),
-							Gender BIT,
-							Phone VARCHAR(20),
-							Email VARCHAR(100),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+)
+Create table Background(
+                           Id int identity(1,1) not null primary key,
+                           Type varchar(30),
+                           Url varchar(255),
+                           Content nvarchar(255),
+                           CreateDate Datetime,
+                           UpdateDate Datetime,
+                           CreateBy varchar(30),
+                           UpdateBy varchar(30),
+                           Status int
 
-CREATE TABLE Category (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+)
+Create table Brand(
+                      Id int identity(1,1) not null primary key,
+                      Name nvarchar(100),
+                      Description nvarchar(255),
+                      CreateDate Datetime,
+                      UpdateDate Datetime,
+                      CreateBy varchar(30),
+                      UpdateBy varchar(30),
+                      Status int
 
-CREATE TABLE Brand (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+)
+Create table Category(
+                         Id int identity(1,1) not null primary key,
+                         Name nvarchar(100),
+                         Description nvarchar(255),
+                         CreateDate Datetime,
+                         UpdateDate Datetime,
+                         CreateBy varchar(30),
+                         UpdateBy varchar(30),
+                         Status int
+)
 
-CREATE TABLE Color (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+Create table Design(
+                       Id int identity(1,1) not null primary key,
+                       Name nvarchar(100),
+                       Description nvarchar(255),
+                       CreateDate Datetime,
+                       UpdateDate Datetime,
+                       CreateBy varchar(30),
+                       UpdateBy varchar(30),
+                       Status int
+)
+Create table Size(
+							 Id int identity(1,1) not null primary key,
+							 Name nvarchar(100),
+							 Description nvarchar(255),
+							 CreateDate Datetime,
+							 UpdateDate Datetime,
+							 CreateBy varchar(30),
+							 UpdateBy varchar(30),
+							 Status int
+)
+Create table Color(
+							  Id int identity(1,1) not null primary key,
+							  Name nvarchar(100),
+							  Description nvarchar(255),
+							  CreateDate Datetime,
+							  UpdateDate Datetime,
+							  CreateBy varchar(30),
+							  UpdateBy varchar(30),
+							  Status int
+)
+Create table Product(
+											Id int identity(1,1) not null primary key,
+											Code varchar(30),
+											Name nvarchar(100),
+											Description nvarchar(255),
+											CreateDate Datetime,
+											UpdateDate Datetime,
+											CreateBy varchar(30),
+											UpdateBy varchar(30),
+											Status int
 
-CREATE TABLE Size (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+)
+Create table ProductImage(
+										 Id int identity(1,1) not null primary key,
+										 Url nvarchar(255),
+										 MainImage bit,
+										 CreateDate Datetime,
+										 UpdateDate Datetime,
+										 CreateBy varchar(30),
+										 UpdateBy varchar(30),
+										 Status int,
+										 IdProduct int foreign key references Product(Id)
+)
+Create table ProductDetail(
+										  Id int identity(1,1) not null primary key,
+										  Weight float,
+										  Price money,
+										  Discount int ,
+										  DiscountDate Datetime,
+										  Description nvarchar(255),
+										  CreateDate Datetime,
+										  UpdateDate Datetime,
+										  CreateBy varchar(30),
+										  UpdateBy varchar(30),
+										  Status int,
+										  IdProduct int foreign key references Product(Id),
+										  IdBrand int foreign key references Brand(Id),                           
+										  IdCategory int foreign key references Category(Id),                          
+										  IdDesign int foreign key references Design(Id)
+)
+Create table ProductFault(
+										 Id int identity(1,1) not null primary key,
+										 Note nvarchar(255),
+										 IdColor int ,
+										 IdSize int ,
+										 Quantity int ,
+										 IdProductDetail int foreign key references ProductDetail(Id)
 
-CREATE TABLE Material (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+)
+Create table Material(
+										 Id int identity(1,1) not null primary key,
+										 Name nvarchar(100),
+										 Description nvarchar(255),
+										 CreateDate Datetime,
+										 UpdateDate Datetime,
+										 CreateBy varchar(30),
+										 UpdateBy varchar(30),
+										 Status int
+)
+Create table ProductDetail_Material(
+										   Id int identity(1,1) not null primary key,
+										   IdProductDetail int foreign key references ProductDetail(Id),
+										   IdMaterial int foreign key references Material(Id)
+)
 
-CREATE TABLE CollarStyle (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+Create table ProductDetail_Color_Size(
+                                         Id int identity(1,1) not null primary key,
+                                         IdProductDetail int foreign key references ProductDetail(Id),
+                                         IdColor int foreign key references Color(Id),
+                                         IdSize int foreign key references Size(Id),
+                                         Quantity int
+)
 
-CREATE TABLE Voucher (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Code VARCHAR(30) UNIQUE,
-							Name NVARCHAR(100),
-							TypeVoucher BIT,
-							IsVoucher BIT,
-							Discount INT,
-							Cash MONEY,
-							StartDate DATETIME,
-							EndDate DATETIME,
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+Create table Voucher(
+                        Id int identity(1,1) not null primary key,
+                        Code varchar(30),
+                        Name nvarchar(100),
+                        TypeVoucher bit,
+                        IsVoucher bit,
+                        Discount int ,
+                        Cash money,
+                        StartDate Datetime,
+                        EndDate Datetime,
+                        CreateDate Datetime,
+                        UpdateDate Datetime,
+                        CreateBy varchar(30),
+                        UpdateBy varchar(30),
+                        Minimum int,
+                        Status int
 
-CREATE TABLE Product (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Code VARCHAR(30),
-							Name NVARCHAR(100),
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT
-);
+)
+Create table Product_Voucher(
+                                Id int identity(1,1) not null primary key,
+                                IdVoucher int foreign key references Voucher(Id),
+                                IdProduct int foreign key references Product(Id),
+)
+Create table ProductDetailHistory(
+                                     Id int identity(1,1) primary key not null,
+                                     ImageMain varchar(max),
+										ImageList varchar(max),
+										UpdateDate datetime,
+										UpdateBy varchar(30),
+										Name nvarchar(100),
+										Price money,
+										Weight float,
+										Description nvarchar(255),
+										IdCategory int ,
+										IdBrand int,
+										IdToe int,
+										IdSole int,
+										IdShoelace int,
+										IdHeelcushion int ,
+										IdDesign int ,
+										IdMaterial varchar(max),
+										IdVoucher varchar(max),
+										IdColor_Size_Quantity varchar(max),
+										Discount int,
+										DiscountDate datetime,
+										SupplierName nvarchar(100),
+										SupplierPhone varchar(15),
+										SupplierAddress nvarchar(255),
+										SupplierAgree nvarchar(255),
+										IdProductDetail int foreign key references ProductDetail(Id)
+)
 
-CREATE TABLE Product_Detail (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Price MONEY,
-							Discount INT,
-							DiscountDate DATETIME,
-							Description NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT,
-							IdProduct INT FOREIGN KEY REFERENCES Product(Id),
-							IdBrand INT FOREIGN KEY REFERENCES Brand(Id),
-							IdCollarStyle INT FOREIGN KEY REFERENCES CollarStyle(Id),
-							IdMaterial INT FOREIGN KEY REFERENCES Material(Id),
-							IdCategory INT FOREIGN KEY REFERENCES Category(Id)
-);
+Create table Address(
+                        Id int identity(1,1) not null primary key,
+                        Fullname nvarchar(100),
+                        Phone varchar(15),
+                        Address nvarchar(255),
+                        CityName nvarchar(100),
+                        DistrictName nvarchar(100),
+                        WardName nvarchar(100),
+                        CityId int,
+                        DistrictId int ,
+                        WardId int,
+                        CreateDate Datetime,
+                        UpdateDate Datetime,
+                        CreateBy varchar(30),
+                        UpdateBy varchar(30),
+                        Status int,
+                        IdCustomer int foreign key references Customer(Id),
+)
+Create table Bill(
+							 Id int identity(1,1) not null primary key,
+							 Code varchar(30),
+							 PurchaseDate Datetime,
+							 EstimatedDate Datetime,
+							 PaymentDate Datetime,
+							 DelyveryDate Datetime,
+							 TotalPrice money,
+							 ShipPrice money,
+							 TotalPriceLast money,
+							 Note nvarchar(255),
+							 PayType int ,
+							 PayStatus int,
+							 TypeStatus int,
+							 Status int,
+							 CodeGHN varchar(30),
+							 IdCoupon int,
+							 IdAddress int foreign key references Address(Id),
+							 IdCustomer int foreign key references Customer(Id),
+							 IdVoucher int foreign key references Voucher(Id),
+							 IdEmployee int foreign key references Employee(Id)
 
-CREATE TABLE Product_Image (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Url VARCHAR(255),
-							MainImage BIT,
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT,
-							IdProduct INT FOREIGN KEY REFERENCES Product(Id)
-);
+)
+Create table BillDetail(
+                           Id int identity(1,1) not null primary key,
+                           UnitPrice money,
+                           Quantity int,
+                           IdColor int,
+                           IdSize int,
+                           IdOrder int foreign key references Bill(Id),
+                           IdProductDetail int foreign key references ProductDetail(Id)
+)
+Create table BillHistory(
+                            Id int identity(1,1) not null primary key,
+                            Note nvarchar(255),
+                            CreateDate Datetime,
+                            UpdateDate Datetime,
+                            CreateBy varchar(30),
+                            UpdateBy varchar(30),
+                            Status int,
+                            IdOrder int foreign key references Bill(Id)
 
-CREATE TABLE Product_Fault (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Note NVARCHAR(255),
-							Quantity INT,
-							IdColor INT,
-							IdSize INT,
-							IdCollarStyle INT,			
-							IdProductDetail INT FOREIGN KEY REFERENCES Product_Detail(Id)
-);
+)
+Create table Rating(
+                       Id int identity(1,1) not null primary key,
+                       Score int,
+                       Note nvarchar(255),
+                       CreateDate Datetime,
+                       UpdateDate Datetime,
+                       CreateBy varchar(30),
+                       UpdateBy varchar(30),
+                       Status int,
+                       IdProductDetail int foreign key references ProductDetail(Id),
+                       IdCustomer int foreign key references Customer(Id)
 
-CREATE TABLE ProductDetail_Color_Size (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							IdProductDetail INT FOREIGN KEY REFERENCES Product_Detail(Id),
-							IdColor INT FOREIGN KEY REFERENCES Color(Id),
-							IdSize INT FOREIGN KEY REFERENCES Size(Id),
-							Quantity INT
-);
+)
+Create table RatingImage(
+                            Id int identity(1,1) not null primary key,
+                            Url varchar(255),
+                            IdRating int foreign key references Rating(Id)
 
-CREATE TABLE Product_Voucher (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							IdVoucher INT FOREIGN KEY REFERENCES Voucher(Id),
-							IdProduct INT FOREIGN KEY REFERENCES Product(Id)
-);
+)
+Create table Cart(
+                     Id int identity(1,1) not null primary key,
+                     IdCustomer int foreign key references Customer(Id)
 
-CREATE TABLE Address (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Fullname NVARCHAR(100),
-							Phone VARCHAR(20),
-							Address NVARCHAR(255),
-							CityName NVARCHAR(100),
-							DistrictName NVARCHAR(100),
-							WardName NVARCHAR(100),
-							IdCity INT,
-							IdDistrict INT,
-							IdWard INT,
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT,
-							IdCustomer INT FOREIGN KEY REFERENCES Customer(Id)
-);
+)
+Create table CartDetail(
+                           Id int identity(1,1) not null primary key,
+                           UnitPrice money,
+                           Quantity int,
+                           IdColor int,
+                           IdSize int,
+                           IdCart int foreign key references Cart(Id),
+                           IdProductDetail int foreign key references ProductDetail(Id)
 
-CREATE TABLE Coupon (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Code VARCHAR(30),
-							Name NVARCHAR(100),
-							IsType BIT,
-							Discount INT,
-							Cash MONEY,
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT,
-							IdCustomer INT FOREIGN KEY REFERENCES Customer(Id)
-);
+)
 
-CREATE TABLE Bill (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Code VARCHAR(30) UNIQUE,
-							PurchaseDate DATETIME,
-							EstimatedDate DATETIME,
-							PaymentDate DATETIME,
-							DeliveryDate DATETIME,
-							TotalPrice MONEY,
-							ShipPrice MONEY,
-							TotalPriceLast MONEY,
-							Note NVARCHAR(255),
-							PayType INT,
-							PayStatus INT,
-							TypeStatus INT,
-							Status INT,
-							CodeGHN VARCHAR(30),
-							IdCoupon INT,
-							IdAddress INT FOREIGN KEY REFERENCES Address(Id),
-							IdEmployee INT FOREIGN KEY REFERENCES Employee(Id),
-							IdVoucher INT FOREIGN KEY REFERENCES Voucher(Id),
-							IdCustomer INT FOREIGN KEY REFERENCES Customer(Id)
-);
+create table OperationHistory(
+                                 Id int identity(1,1) not null primary key,
+                                 CreateDate datetime,
+                                 CreateBy nvarchar(100),
+                                 IdProductDetail int,
+                                 Status int
 
-CREATE TABLE Bill_Detail (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							UnitPrice MONEY,
-							Quantity INT,
-							IdColor INT,
-							IdSize INT,
-							IdOrder INT FOREIGN KEY REFERENCES Bill(Id),
-							IdProductDetail INT FOREIGN KEY REFERENCES Product_Detail(Id)
-);
-
-CREATE TABLE Bill_History (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							Note NVARCHAR(255),
-							CreateDate DATETIME,
-							UpdateDate DATETIME,
-							CreateBy VARCHAR(30),
-							UpdateBy VARCHAR(30),
-							Status INT,
-							IdOrder INT FOREIGN KEY REFERENCES Bill(Id)
-);
-
-CREATE TABLE Cart (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							IdCustomer INT FOREIGN KEY REFERENCES Customer(Id)
-);
-
-CREATE TABLE Cart_Detail (
-							Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-							UnitPrice MONEY,
-							Quantity INT,
-							IdColor INT,
-							IdSize INT,
-							IdCart INT FOREIGN KEY REFERENCES Cart(Id),
-							IdProductDetail INT FOREIGN KEY REFERENCES Product_Detail(Id)
-);
+)
 
 
 
@@ -304,8 +368,8 @@ INSERT INTO Role (Name, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
 VALUES ('Admin', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "employee"
-INSERT INTO Employee (Code, Fullname, Username, Password, Image, Gender, Phone, Email, Enabled, CreateDate, UpdateDate, CreateBy, UpdateBy, status, IdRole)
-VALUES ('Employee Code', 'John Doe', 'sa', '123456', 'Image URL', 1, '0123456789', 'employee@example.com', 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1);
+INSERT INTO Employee (Code, Fullname, Username, Password, Image, Gender, Phone, Email, CreateDate, UpdateDate, CreateBy, UpdateBy, status, IdRole)
+VALUES ('Employee Code', 'John Doe', 'sa', '123', 'Image URL', 1, '0123456789', 'employee@example.com', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1);
 
 -- Thêm dữ liệu vào bảng "category"
 INSERT INTO Category (Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
@@ -320,10 +384,10 @@ VALUES ('Brand 1', 'Brand 1 description', '2024-04-30', '2024-04-30', 'Admin', '
        ('Brand 3', 'Brand 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "collar_style"
-INSERT INTO CollarStyle (Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
-VALUES ('Collar Style 1', 'Collar Style 1description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
-       ('Collar Style 2', 'Collar Style 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
-       ('Collar Style 3', 'Collar Style 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+INSERT INTO Design (Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
+VALUES ('Design 1', 'Design 1description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Design 2', 'Design 2 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
+       ('Design 3', 'Design 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "color"
 INSERT INTO Color (Name, description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
@@ -355,19 +419,19 @@ VALUES ('P001', 'Product 1', 'Product 1 description', '2024-04-30', '2024-04-30'
        ('P003', 'Product 3', 'Product 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "product_detail"
-INSERT INTO Product_Detail (Price, Discount, DiscountDate, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct, IdBrand, IdCollarStyle, IdMaterial, IdCategory)
+INSERT INTO ProductDetail (Price, Discount, DiscountDate, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct, IdBrand, IdDesign, IdMaterial, IdCategory)
 VALUES (99.99, 10, '2024-04-30', 'Product 1 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1, 1, 1, 1, 1),
        (149.99, 20, '2024-04-30', 'Product 2 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 2, 2, 2, 2, 2),
        (199.99, 30, '2024-04-30', 'Product 3 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3, 3, 3, 3, 3);
 
 -- Thêm dữ liệu vào bảng "product_image"
-INSERT INTO Product_Image (Url, MainImage, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct)
+INSERT INTO ProductImage (Url, MainImage, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct)
 VALUES ('image_url_1', 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1),
        ('image_url_2', 0, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 2),
        ('image_url_3', 0, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3);
 
 -- Thêm dữ liệu vào bảng "product_fault"
-INSERT INTO Product_Fault(Note, IdColor, IdSize, IdCollarStyle, Quantity, IdProductDetail)
+INSERT INTO ProductFault(Note, IdColor, IdSize, IdCollarStyle, Quantity, IdProductDetail)
 VALUES ('Fault 1', 1, 1, 1, 5, 1),
        ('Fault 2', 2, 2, 2, 3, 2),
        ('Fault 3', 3, 3, 3, 2, 3);
@@ -379,7 +443,7 @@ VALUES (1, 1, 1, 10),
        (3, 3, 3, 8);
 
 -- Thêm dữ liệu vào bảng "product_voucher"
-INSERT INTO Product_Voucher(IdVoucher, IdProduct)
+INSERT INTO ProductVoucher(IdVoucher, IdProduct)
 VALUES (1, 1),
        (2, 2);
 
@@ -399,7 +463,7 @@ VALUES ('HD01', '2024-04-30', '2024-05-01', '2024-05-02', '2024-05-03', 100.00, 
        ('HD02', '2024-04-30', '2024-05-01', '2024-05-02', '2024-05-03', 200.00, 20.00, 220.00, 'Note 2', 2, 1, 1, 10, 'GHN002', 1, 1, 1, 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill_detail"
-INSERT INTO Bill_Detail (UnitPrice, Quantity, IdColor, IdSize, IdOrder, IdProductDetail)
+INSERT INTO BillDetail (UnitPrice, Quantity, IdColor, IdSize, IdOrder, IdProductDetail)
 VALUES (10.00, 2, 1, 1, 1, 1),
        (20.00, 3, 2, 2, 2, 1);
 

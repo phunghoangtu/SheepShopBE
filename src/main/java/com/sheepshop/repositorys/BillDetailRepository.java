@@ -1,5 +1,6 @@
 package com.sheepshop.repositorys;
 
+
 import com.sheepshop.entitys.BillDetail;
 import com.sheepshop.model.resp.BillDaBanResponse;
 import com.sheepshop.model.resp.TKSanPham;
@@ -11,15 +12,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BillDetailRepository extends JpaRepository<BillDetail, Integer> {
+public interface BillDetailRepository extends JpaRepository<BillDetail,Integer> {
 
-    @Query("select e from BillDetail e where e.bill.code = :code")
+    @Query("select e from BillDetail e where e.bill.Code = :code")
     List<BillDetail> getAllByBill(@Param("code") String code);
-
     @Query("select e from BillDetail e where e.Id = :id")
     BillDetail getById(@Param("id") Integer id);
-
-
     @Query(value = "Select bd.IdColor,bd.IdSize ,SUM(bd.Quantity) as 'Quantity', SUM(bd.UnitPrice * bd.Quantity) as 'Price' from BillDetail bd\n" +
             "join Bill b on b.Id = bd.IdOrder\n" +
             "where bd.IdProductDetail = :id and b.Status = 3\n" +
@@ -37,5 +35,4 @@ public interface BillDetailRepository extends JpaRepository<BillDetail, Integer>
             "Group by pm.Url  ,pro.Code, pro.Name\n" +
             "order by SUM(bi.Quantity) desc", nativeQuery = true)
     List<TKSanPham> getTKSanPham();
-
 }

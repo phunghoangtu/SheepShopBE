@@ -1,7 +1,7 @@
 package com.sheepshop.rest;
 
-import com.sheepshop.model.req.ColorRequest;
-import com.sheepshop.services.ColorService;
+import com.sheepshop.model.req.DesignRequest;
+import com.sheepshop.services.DesignService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,18 +13,14 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/color")
-public class ColorRest {
+@RequestMapping("/api/design")
+public class DesignRest {
     @Autowired
-    private ColorService service;
+    private DesignService service;
 
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(service.getAll());
-    }
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getColorById(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(service.getColorByProduct(id));
     }
 
     @GetMapping("/search/{name}")
@@ -36,7 +32,7 @@ public class ColorRest {
         return ResponseEntity.ok(service.getById(id));
     }
     @PostMapping()
-    public ResponseEntity<?> add(@Valid @RequestBody ColorRequest request, BindingResult result){
+    public ResponseEntity<?> add(@Valid @RequestBody DesignRequest request, BindingResult result){
         if (result.hasErrors()){
             List<ObjectError> list = result.getAllErrors();
             return ResponseEntity.badRequest().body(list);
@@ -44,7 +40,7 @@ public class ColorRest {
         return ResponseEntity.ok(service.add(request));
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer Id,@Valid @RequestBody ColorRequest request, BindingResult result){
+    public ResponseEntity<?> update(@PathVariable("id") Integer Id,@Valid @RequestBody DesignRequest request, BindingResult result){
         if (result.hasErrors()){
             List<ObjectError> list = result.getAllErrors();
             return ResponseEntity.badRequest().body(list);

@@ -1,6 +1,5 @@
 package com.sheepshop.rest;
 
-
 import com.sheepshop.model.req.ProductDetailRequest;
 import com.sheepshop.model.req.ValidateForm;
 import com.sheepshop.services.ProductDetailExelService;
@@ -22,25 +21,21 @@ import java.util.List;
 @RequestMapping("/api/product")
 public class ProductDetailRest {
     @Autowired
-    private ProductDetailService service;
+    ProductDetailService service;
     @Autowired
-    private ProductDetailExelService productDetailExelService;
-
+    ProductDetailExelService productDetailExelService;
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(service.getAll());
     }
-
     @GetMapping("/getall1")
     public ResponseEntity<?> getAll1(){
         return ResponseEntity.ok(service.getAll1());
     }
-
     @GetMapping("/getAllBanChay")
     public ResponseEntity<?> getAllBanChay(){
         return ResponseEntity.ok(service.getAllBanChay());
     }
-
     @GetMapping("/findAll")
     public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(service.findAll());
@@ -51,7 +46,6 @@ public class ProductDetailRest {
     public ResponseEntity<?> getAllByProductName(@PathVariable("name") String name){
         return ResponseEntity.ok(service.getAllbyProductName(name));
     }
-
     @GetMapping("/filter")
     public ResponseEntity<?> getAllByFilter(
                                             @RequestParam(name = "idcategory",required = false) Integer IdCategory,
@@ -141,10 +135,6 @@ public class ProductDetailRest {
     public ResponseEntity<?> getByIdCategory(@RequestParam("id") Integer id,
                                              @RequestParam("idBrand") Integer idBrand ,
                                              @RequestParam("idDesign") Integer idDesign,
-                                             @RequestParam("idToe") Integer idToe,
-                                             @RequestParam("idSole") Integer idSole,
-                                             @RequestParam("idShoelace") Integer idShoelcae,
-                                             @RequestParam("idHeelcushion") Integer idHeelcushion,
                                              @RequestParam("idProduct") Integer idProduct){
         return ResponseEntity.ok(service.getProductByCategory(id,idBrand,idDesign,idProduct));
     }

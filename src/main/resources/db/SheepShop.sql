@@ -410,7 +410,7 @@ VALUES ('Material 1', 'Material 1 description', '2024-04-30', '2024-04-30', 'Adm
 -- Thêm dữ liệu vào bảng "voucher"
 INSERT INTO Voucher (Code, Name, TypeVoucher, IsVoucher, Discount, Cash, StartDate, EndDate, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
 VALUES ('VOUCHER001', 'Voucher 1', 1, 1, 10, 0, '2024-04-30', '2024-05-31', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0),
-       ('VOUCHER002', 'Voucher 2', 0, 1, 0, 50.00, '2024-04-30', '2024-06-30', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
+       ('VOUCHER002', 'Voucher 2', 0, 1, 0, 50, '2024-04-30', '2024-06-30', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "product"
 INSERT INTO Product (Code, Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
@@ -419,10 +419,10 @@ VALUES ('P001', 'Product 1', 'Product 1 description', '2024-04-30', '2024-04-30'
        ('P003', 'Product 3', 'Product 3 description', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "product_detail"
-INSERT INTO ProductDetail (Price, Discount, DiscountDate, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct, IdBrand, IdDesign, IdMaterial, IdCategory)
-VALUES (99.99, 10, '2024-04-30', 'Product 1 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1, 1, 1, 1, 1),
-       (149.99, 20, '2024-04-30', 'Product 2 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 2, 2, 2, 2, 2),
-       (199.99, 30, '2024-04-30', 'Product 3 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3, 3, 3, 3, 3);
+INSERT INTO ProductDetail (Price, Discount, DiscountDate, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct, IdBrand, IdDesign, IdCategory)
+VALUES (100000, 10, '2024-04-30', 'Product 1 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1, 1, 1,  1),
+       (150000, 20, '2024-04-30', 'Product 2 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 2, 2, 2, 2),
+       (2000000, 30, '2024-04-30', 'Product 3 detail', '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3, 3, 3,  3);
 
 -- Thêm dữ liệu vào bảng "product_image"
 INSERT INTO ProductImage (Url, MainImage, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct)
@@ -431,10 +431,10 @@ VALUES ('image_url_1', 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1),
        ('image_url_3', 0, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 3);
 
 -- Thêm dữ liệu vào bảng "product_fault"
-INSERT INTO ProductFault(Note, IdColor, IdSize, IdCollarStyle, Quantity, IdProductDetail)
-VALUES ('Fault 1', 1, 1, 1, 5, 1),
-       ('Fault 2', 2, 2, 2, 3, 2),
-       ('Fault 3', 3, 3, 3, 2, 3);
+INSERT INTO ProductFault(Note, IdColor, IdSize, Quantity, IdProductDetail)
+VALUES ('Fault 1', 1, 1, 5, 1),
+       ('Fault 2', 2, 2, 3, 2),
+       ('Fault 3', 3, 3, 2, 3);
 
 -- Thêm dữ liệu vào bảng "product_detail_color_size"
 INSERT INTO ProductDetail_Color_Size (IdProductDetail, IdColor, IdSize, Quantity)
@@ -443,12 +443,12 @@ VALUES (1, 1, 1, 10),
        (3, 3, 3, 8);
 
 -- Thêm dữ liệu vào bảng "product_voucher"
-INSERT INTO ProductVoucher(IdVoucher, IdProduct)
+INSERT INTO Product_Voucher(IdVoucher, IdProduct)
 VALUES (1, 1),
        (2, 2);
 
 -- Thêm dữ liệu vào bảng "address"
-INSERT INTO Address(Fullname, Phone, Address, CityName, DistrictName, WardName, IdCity, IdDistrict, IdWard, CreateDate, UpdateDate, CreateBy, UpdateBy , Status, IdCustomer)
+INSERT INTO Address(Fullname, Phone, Address, CityName, DistrictName, WardName, CityId, DistrictId, WardId, CreateDate, UpdateDate, CreateBy, UpdateBy , Status, IdCustomer)
 VALUES ('John Doe', '123456789', '123 Main Street', 'City', 'District', 'Ward', 1, 1, 1, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1),
        ('Jane Doe', '987654321', '456 Elm Street', 'City', 'District', 'Ward', 2, 2, 2, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 0, 1);
 
@@ -458,13 +458,13 @@ VALUES ('COUPON001', 'Coupon 1', 1, 10, 0, '2024-04-30', '2024-04-30', 'Admin', 
        ('COUPON002', 'Coupon 2', 0, 0, 50.00, '2024-04-30', '2024-04-30', 'Admin', 'Admin', 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill"
-INSERT INTO Bill(Code, PurchaseDate, EstimatedDate, PaymentDate, DeliveryDate, TotalPrice, ShipPrice, TotalPriceLast, Note, PayType, PayStatus, TypeStatus, Status, CodeGHN, IdCoupon, IdAddress, IdEmployee, IdVoucher, IdCustomer)
+INSERT INTO Bill(Code, PurchaseDate, EstimatedDate, PaymentDate, DelyveryDate, TotalPrice, ShipPrice, TotalPriceLast, Note, PayType, PayStatus, TypeStatus, Status, CodeGHN, IdCoupon, IdAddress, IdEmployee, IdVoucher, IdCustomer)
 VALUES ('HD01', '2024-04-30', '2024-05-01', '2024-05-02', '2024-05-03', 100.00, 10.00, 110.00, 'Note 1', 1, 1, 1, 10, 'GHN001', 1, 1, 1, 1, 1),
        ('HD02', '2024-04-30', '2024-05-01', '2024-05-02', '2024-05-03', 200.00, 20.00, 220.00, 'Note 2', 2, 1, 1, 10, 'GHN002', 1, 1, 1, 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill_detail"
 INSERT INTO BillDetail (UnitPrice, Quantity, IdColor, IdSize, IdOrder, IdProductDetail)
 VALUES (10.00, 2, 1, 1, 1, 1),
-       (20.00, 3, 2, 2, 2, 1);
+       (20.00, 3, 1, 1, 1, 1);
 
 

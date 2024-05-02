@@ -41,7 +41,7 @@ public class ChangeRest {
             List<ObjectError> list = result.getAllErrors();
             return ResponseEntity.badRequest().body(list);
         }
-        if (!employeeService.getById(id).getPassword().equals(form.getPasswordCu())){
+        if (!service.getById(id).getPassword().equals(form.getPasswordCu())){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("err");
         }
 

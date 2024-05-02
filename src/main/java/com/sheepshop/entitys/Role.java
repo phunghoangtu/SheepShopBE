@@ -1,5 +1,6 @@
 package com.sheepshop.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -49,6 +50,7 @@ public class Role implements Serializable {
     @Column(name = "Status")
     private Integer Status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role")
     private Set<Employee> employees = new LinkedHashSet<>();
 

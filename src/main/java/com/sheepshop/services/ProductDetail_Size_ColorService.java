@@ -42,9 +42,11 @@ public class ProductDetail_Size_ColorService {
         productDetail_size_color.setQuantity(request.getQuantity());
         return repository.save(productDetail_size_color);
     }
-    public ProductdetailColorSize updateQuantity(Integer id,Integer IdColor, Integer IdSize,Integer quanity){
-        ProductdetailColorSize productDetail_size_color =repository.getByProductAndColorAndSize(id,IdColor,IdSize);
-        productDetail_size_color.setQuantity(quanity);
+
+
+    public ProductdetailColorSize updateQuantity(Integer IdProduct,Integer IdColor, Integer IdSize,Integer quantity){
+        ProductdetailColorSize productDetail_size_color = repository.getByProductAndColorAndSize(IdProduct,IdColor,IdSize);
+        productDetail_size_color.setQuantity(quantity);
         return repository.save(productDetail_size_color);
     }
 

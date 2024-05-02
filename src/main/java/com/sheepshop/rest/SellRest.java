@@ -1,5 +1,6 @@
 package com.sheepshop.rest;
 
+import com.sheepshop.model.req.BillDetailRequest;
 import com.sheepshop.model.req.BillTaiQuayRequest;
 import com.sheepshop.services.BillDetailService;
 import com.sheepshop.services.BillService;
@@ -37,11 +38,6 @@ public class SellRest {
         return ResponseEntity.ok(billDetailService.getAllbyBill(code));
     }
 
-    @GetMapping("/getallbyproduct/{id}")
-    public ResponseEntity<?> getallbyproduct(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(billDetailService.getAllByIdProduct(id));
-    }
-
     @GetMapping("/gettkngay")
     public ResponseEntity<?> gettkngay(){
         return ResponseEntity.ok(billService.getTKNgay());
@@ -74,5 +70,16 @@ public class SellRest {
     public ResponseEntity<?> gettksanpham(){
         return ResponseEntity.ok(billDetailService.getTKSanPham());
     }
+    @GetMapping("/getallbyproduct/{id}")
+    public ResponseEntity<?> getallbyproduct(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(billDetailService.getAllByIdProduct(id));
+    }
+
+    @PutMapping("/updateBillDetail/{id}")
+    public ResponseEntity<?> updateBillDetail(@PathVariable("id") Integer id,@RequestBody BillDetailRequest billDetailRequest){
+        return ResponseEntity.ok(billDetailService.updateBillDetail(id,billDetailRequest));
+    }
+
+
 
 }

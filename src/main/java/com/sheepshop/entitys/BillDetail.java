@@ -16,19 +16,19 @@ public class BillDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-    private Integer id;
+    private Integer Id;
 
     @Column(name = "UnitPrice")
-    private BigDecimal unitPrice;
+    private BigDecimal UnitPrice;
 
     @Column(name = "Quantity")
-    private Integer quantity;
+    private Integer Quantity;
 
     @Column(name = "IdColor")
-    private Integer idColor;
+    private Integer IdColor;
 
     @Column(name = "IdSize")
-    private Integer idSize;
+    private Integer IdSize;
 
     @ManyToOne
     @JoinColumn(name = "IdOrder")

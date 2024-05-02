@@ -50,10 +50,12 @@ public class ProductDetail_Color_SizeRest {
     public ResponseEntity<?> add(@RequestBody ProductDetail_Size_ColorRequest request){
         return ResponseEntity.ok(service.add(request));
     }
+
     @PutMapping("/updateQuantity")
     public ResponseEntity<?> updateQuantity(@RequestParam("IdProduct") Integer IdProduct, @RequestParam("IdColor") Integer IdColor, @RequestParam("IdSize") Integer IdSize, @RequestParam("Quantity") Integer Quanity){
         return ResponseEntity.ok(service.updateQuantity(IdProduct,IdColor,IdSize,Quanity));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id){
         service.delete(id);

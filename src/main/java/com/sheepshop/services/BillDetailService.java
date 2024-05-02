@@ -2,6 +2,7 @@ package com.sheepshop.services;
 
 
 import com.sheepshop.entitys.BillDetail;
+import com.sheepshop.model.req.BillDetailRequest;
 import com.sheepshop.model.resp.BillDaBanResponse;
 import com.sheepshop.model.resp.TKSanPham;
 import com.sheepshop.repositorys.BillDetailRepository;
@@ -27,6 +28,14 @@ public class BillDetailService {
     public List<TKSanPham> getTKSanPham(){
         return repository.getTKSanPham();
     }
+
+    public BillDetail updateBillDetail(Integer id,BillDetailRequest request){
+        BillDetail billDetail = repository.getById(id);
+        billDetail.setQuantity(request.getQuantity());
+        billDetail.setUnitPrice(request.getUnitPrice());
+        return repository.save(billDetail);
+    }
+
 
 
 }

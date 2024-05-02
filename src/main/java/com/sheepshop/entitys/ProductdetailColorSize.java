@@ -1,5 +1,6 @@
 package com.sheepshop.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class ProductdetailColorSize {
     private Integer id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "IdProductDetail")
     private ProductDetail productDetail;
 

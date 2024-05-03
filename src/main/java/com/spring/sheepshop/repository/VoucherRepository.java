@@ -18,8 +18,6 @@ public interface VoucherRepository extends JpaRepository<Voucher, Integer> {
     public List<Voucher> searchByName(@Param("name") String name);
     @Query(value = "select e from Voucher e where e.Id = :id")
     public Voucher getById(@Param("id") Integer Id);
-
-
     @Modifying
     @Transactional
     @Query(value = "UPDATE Voucher SET Status = 1 WHERE EndDate <= DATEADD(MINUTE, 1, GETDATE())\n",nativeQuery = true)

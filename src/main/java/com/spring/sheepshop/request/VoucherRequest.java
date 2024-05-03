@@ -19,20 +19,12 @@ public class VoucherRequest {
     private String Name;
     private Boolean TypeVoucher;
     private Boolean IsVoucher;
-//    @NotNull(message = "Khuyến mãi theo % không được bỏ trống !")
-//    @Min(value = 1, message = "Khuyến mãi theo % phải là số nguyên dương !")
-//    @Max(value = 100, message = "Khuyến mãi theo % nhỏ hơn hoặc bằng 99")
     private Integer Discount;
-//     @NotNull(message = "Khuyến mãi theo tiền không được bỏ trống !")
-//     @Min(value = 1, message = "Khuyến mãi theo tiền phải là số nguyên dương !")
-
     private BigDecimal Cash;
     @NotNull(message = "Không được bỏ trống ngày bắt đầu ")
     private Timestamp StartDate;
     @NotNull(message = "Không được bỏ trống ngày kết thúc ")
     private Timestamp EndDate;
-//    @NotNull(message = "Hóa đơn áp dụng không được bỏ trống !")
-//    @Min(value = 1, message = "Hóa đơn áp dụng phải là số nguyên dương !")
     private Integer Minimum;
 
 

@@ -14,15 +14,10 @@ public class ProductDetailHistoryRequest {
     private Date UpdateDate;
     private String UpdateBy;
     private String Name;
-    private Double Weight;
     private BigDecimal Price;
     private String Description;
     private Integer IdCategory;
     private Integer IdBrand;
-    private Integer IdToe;
-    private Integer IdSole;
-    private  Integer IdShoelace;
-    private Integer IdHeelcushion;
     private Integer IdDesign;
     private String IdMaterial;
     private String IdColor_Size_Quantity;

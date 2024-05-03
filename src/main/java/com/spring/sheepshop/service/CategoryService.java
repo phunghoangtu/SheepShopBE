@@ -17,7 +17,7 @@ import java.util.List;
 public class CategoryService {
     @Autowired
     CategoryRepository repository;
-    @Cacheable(value = "categoryCache", key = "'getAll'")
+
     public List<Category> getAll(){
         return repository.getAll();
     }

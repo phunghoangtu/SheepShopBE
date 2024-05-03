@@ -17,7 +17,7 @@ import java.util.List;
 public class MaterialService {
     @Autowired
     MaterialRepository repository;
-    @Cacheable(value = "materialCache", key = "'getAll'")
+
     public List<Material> getAll(){
         return repository.getAll();
     }

@@ -17,7 +17,6 @@ import java.util.List;
 public class SizeService {
     @Autowired
     SizeRepository repository;
-    @Cacheable(value = "sizeCache", key = "'getAll'")
     public List<Size> getAll(){
         return repository.getAll();
     }

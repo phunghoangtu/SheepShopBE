@@ -17,7 +17,7 @@ import java.util.List;
 public class ColorService {
     @Autowired
     ColorRepository repository;
-    @Cacheable(value = "colorCache", key = "'getAll'")
+
     public List<Color> getAll(){
         return repository.getAll();
     }

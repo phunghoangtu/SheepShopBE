@@ -17,7 +17,7 @@ import java.util.List;
 public class BrandService {
     @Autowired
     BrandRepository repository;
-    @Cacheable(value = "brandCache", key = "'getAll'")
+
     public List<Brand> getAll(){
         return repository.getAll();
     }

@@ -47,6 +47,7 @@ public class BillService {
         return repository.save(bill);
 
     }
+
     public Bill update(String code, BillTaiQuayUpdateRequest request){
         Bill bill = repository.getByCode(code);
         bill.setNote(request.getNote());
@@ -71,6 +72,7 @@ public class BillService {
         bill.setTypeStatus(request.getTypeStatus());
         return repository.save(bill);
     }
+
     public Bill updateStatus(String code, UpdateThanhToanTaiQuay request){
         Bill bill = repository.getByCode(code);
 
@@ -81,9 +83,11 @@ public class BillService {
         return repository.save(bill);
 
     }
+
     public List<BillResponse> getBillFilter(Integer status, Integer payStatus, Integer payType, Integer typeStatus, String tungay, String denngay ){
         return repository.getBillFilter(status,payStatus,payType,typeStatus,tungay,denngay);
     }
+
     public Bill updateStatus1(String code, UpdateThanhToanTaiQuay request){
         Bill bill = repository.getByCode(code);
         bill.setDelyveryDate(new Date());
@@ -92,54 +96,66 @@ public class BillService {
         return repository.save(bill);
 
     }
+
     public Bill updateStatusPay(String code){
-    Bill bill = repository.getByCode(code);
-    bill.setPayStatus(1);
-    bill.setStatus(0);
-    bill.setPaymentDate(new Date());
-    return repository.save(bill);
+        Bill bill = repository.getByCode(code);
+        bill.setPayStatus(1);
+        bill.setStatus(0);
+        bill.setPaymentDate(new Date());
+        return repository.save(bill);
     }
+
     public Bill updateStatus(UpdateBillStatus updateBillStatus){
         Bill bill = repository.getByCode(updateBillStatus.getCode());
         bill.setStatus(updateBillStatus.getStatus());
         return repository.save(bill);
     }
+
     public Bill updateDiaChi(String Code , Integer IdDiachi){
         Bill bill = repository.getByCode(Code);
         bill.setAddress(Address.builder().Id(IdDiachi).build());
         return repository.save(bill);
     }
+
     public Bill updateTongTien(String Code , BigDecimal money){
         Bill bill = repository.getByCode(Code);
         bill.setTotalPrice(money);
         return repository.save(bill);
     }
+
     public Bill updatePhiShip(UpdateBillShipPrice updateBillShipPrice){
         Bill bill = repository.getByCode(updateBillShipPrice.getCode());
         bill.setShipPrice(updateBillShipPrice.getMoney());
         return repository.save(bill);
     }
+
     public void huyBill(String code){
         Bill bill = repository.getByCode(code);
         bill.setStatus(4);
         repository.save(bill);
     }
+
     public void deleteBill(String code){
         Bill bill = repository.getByCode(code);
         repository.delete(bill);
     }
+
     public List<BillResponse> getBillByCustomer(Integer status , Integer idCustomer){
         return repository.getBillByCustomer(status,idCustomer);
     }
+
     public List<BillAllResponse> getAllBill(){
         return repository.getAllBill();
     }
+
     public BillResponse getByCode(String code){
         return repository.getBillBycode(code);
     }
+
     public List<BillResponse> getAllByStatus(Integer status){
         return repository.getBillByStatus(status);
     }
+
     public Bill addBillTaiQuay(BillTaiQuayRequest request){
         Bill bill = new Bill();
         bill.setCode(genCode());
@@ -149,6 +165,7 @@ public class BillService {
         bill.setEmployee(Employee.builder().Id(request.getIdEmployee()).build());
         return repository.save(bill);
     }
+
     public List<BillResponse> getAll(){
         return repository.getAll();
     }
@@ -156,19 +173,25 @@ public class BillService {
     public TKNgay getTKNgay(){
         return repository.getThongKeNgay();
     }
+
     public TKThang getTKThang(){
         return repository.getThongKeThang();
     }
+
     public TKSLThang getTKSLThang(){
         return repository.getThongKeSoLuongThang();
     }
+
     public List<TKSoLuongHD> getTKSoLuongHD(String tungay, String denngay){
         return repository.getTKSoLuongHD(tungay,denngay);
     }
+
     public List<TKSoLuongSanPham> getTKSoLuongSanPham(String tungay, String denngay){
         return repository.getTKSoLuongSanPham(tungay,denngay);
     }
+
     public List<TKHoaDonStatus> getTKSoLuongHDStatus(String tungay, String denngay){
         return repository.getTKSoLuongHDStatus(tungay,denngay);
     }
+
 }

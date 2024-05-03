@@ -19,6 +19,7 @@ import java.util.Set;
 @Setter
 @Entity
 public class Product implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

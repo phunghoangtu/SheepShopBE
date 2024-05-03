@@ -15,6 +15,7 @@ import java.util.List;
 
 @Service
 public class BillDetailService {
+
     @Autowired
     private BillDetailRepository repository;
 

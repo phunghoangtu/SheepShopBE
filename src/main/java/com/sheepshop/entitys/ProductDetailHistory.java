@@ -17,6 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Table(name = "ProductDetailHistory")
 public class ProductDetailHistory implements Serializable {
 
     @Id

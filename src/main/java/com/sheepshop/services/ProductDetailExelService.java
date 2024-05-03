@@ -50,14 +50,6 @@ public class ProductDetailExelService {
                    Integer idcate = category.intValue();
                    Double brand = row.getCell(7).getNumericCellValue();
                    Integer idbrand = brand.intValue();
-                   Double toe = row.getCell(8).getNumericCellValue();
-                   Integer idtoe = toe.intValue();
-                   Double sole = row.getCell(9).getNumericCellValue();
-                   Integer idsole = sole.intValue();
-                   Double shoelace = row.getCell(10).getNumericCellValue();
-                   Integer idshoelace = shoelace.intValue();
-                   Double heelcushion = row.getCell(11).getNumericCellValue();
-                   Integer idheel = heelcushion.intValue();
                    Double design = row.getCell(12).getNumericCellValue();
                    Integer iddesign = design.intValue();
                    String materials = row.getCell(13).getStringCellValue();

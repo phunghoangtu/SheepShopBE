@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class BillHistoryService {
+
     @Autowired
     private BillHistoryRepository repository;
 
@@ -25,12 +26,15 @@ public class BillHistoryService {
         billHistory.setBill(Bill.builder().Id(request.getIdBill()).build());
         return repository.save(billHistory);
     }
+
     public List<BillHistoryResponse> getAllByBill(String code){
         return repository.getAllByBill(code);
     }
+
     public List<BillHistoryResponse> getAllByBill1(String code){
         return repository.getAllByBill1(code);
     }
+
     public void deleteBillDetailByCode(String code){
         List<BillHistory> list = repository.getAllByBillCode(code);
         for (BillHistory billHistory: list
@@ -39,4 +43,5 @@ public class BillHistoryService {
 
         }
     }
+
 }

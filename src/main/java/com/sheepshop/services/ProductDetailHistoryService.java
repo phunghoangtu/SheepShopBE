@@ -5,13 +5,13 @@ import com.sheepshop.entitys.ProductDetailHistory;
 import com.sheepshop.model.req.ProductDetailHistoryRequest;
 import com.sheepshop.repositorys.ProductDetailHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProductDetailHistoryService {
+
     @Autowired
     private ProductDetailHistoryRepository repository;
 
@@ -40,10 +40,13 @@ public class ProductDetailHistoryService {
         productDetailHistory.setSupplierAgree(request.getSupplierAgree());
        return repository.save(productDetailHistory);
     }
+
     public List<ProductDetailHistory> getAllById(Integer id){
         return repository.getAllById(id);
     }
+
     public ProductDetailHistory getById(Integer id){
         return repository.getById(id);
     }
+
 }

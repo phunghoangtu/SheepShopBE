@@ -13,6 +13,10 @@ public class ProductDetail_MaterialRest {
     @Autowired
     private ProductDetail_MaterialService service;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(service.getById(id));
+    }
 
     @PostMapping()
     public ResponseEntity<?> add(@RequestBody ProductDetail_MaterialRequest request){

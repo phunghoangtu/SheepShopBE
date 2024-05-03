@@ -41,7 +41,7 @@ public class ProductDetailService {
 //        }
         return repository.getAllByProductName("%"+name+"%");
     }
-    public List<ProductDetail> getAllbyFilter(Integer IdColor,Integer IdSize,Integer IdMaterial,Integer IdCategory, Integer IdBrand , Integer IdToe, Integer IdSole,Integer IdShoelace,Integer IdHeelcushion, Integer IdDesign,Double min , Double max,Double minTL , Double maxTL,Integer soLuong,Integer soLuong1){
+    public List<ProductDetail> getAllbyFilter(Integer IdColor,Integer IdSize,Integer IdMaterial,Integer IdCategory, Integer IdBrand , Integer IdDesign,Double min , Double max,Double minTL , Double maxTL,Integer soLuong,Integer soLuong1){
         String text = "";
 //        if(name != null){
 //            String [] spl = name.split(" ");
@@ -64,8 +64,7 @@ public class ProductDetailService {
         return repository.findAll(pageable);
     }
     public ProductDetail getById(Integer id){
-       ProductDetail productDetail = repository.getById(id);
-       return productDetail;
+        return repository.getById(id);
     }
     public ProductDetail add(ProductDetailRequest request){
         ProductDetail productDetail = new ProductDetail();

@@ -53,10 +53,6 @@ public class ProductDetailRest {
                                             @RequestParam(name = "idcolor",required = false) Integer IdColor,
                                             @RequestParam(name = "idsize",required = false) Integer IdSize,
                                             @RequestParam(name = "idbrand",required = false) Integer IdBrand,
-                                            @RequestParam(name = "idtoe",required = false) Integer IdToe,
-                                            @RequestParam(name = "idsole",required = false) Integer IdSole,
-                                            @RequestParam(name = "idshoelace",required = false) Integer IdShoelace,
-                                            @RequestParam(name = "idheelcushion",required = false) Integer IdHeelcushion,
                                             @RequestParam(name = "iddesign",required = false) Integer IdDesign,
                                             @RequestParam("min") Double min,
                                             @RequestParam("max") Double max,
@@ -64,7 +60,7 @@ public class ProductDetailRest {
                                             @RequestParam("maxTL") Double maxTL,
                                             @RequestParam(name = "soLuong",required = false) Integer soLuong,
                                             @RequestParam(name = "soLuong1",required = false) Integer soLuong1){
-        return ResponseEntity.ok(service.getAllbyFilter(IdColor,IdSize,IdMaterial,IdCategory,IdBrand,IdToe,IdSole,IdShoelace,IdHeelcushion,IdDesign,min,max,minTL,maxTL,soLuong,soLuong1));
+        return ResponseEntity.ok(service.getAllbyFilter(IdColor,IdSize,IdMaterial,IdCategory,IdBrand,IdDesign,min,max,minTL,maxTL,soLuong,soLuong1));
     }
 
     @GetMapping("/phantrang")

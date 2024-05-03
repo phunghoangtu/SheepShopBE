@@ -28,4 +28,8 @@ public class ProductDetail_MaterialService {
             repository.delete(p);
         }
     }
+
+    public ProductdetailMaterial getById(Integer id) {
+        return repository.findById(id).get();
+    }
 }

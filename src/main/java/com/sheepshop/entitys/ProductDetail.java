@@ -9,15 +9,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
+@Builder
 @Entity
 public class ProductDetail implements Serializable {
 
@@ -100,7 +98,7 @@ public class ProductDetail implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "productDetail")
-    private Set<ProductdetailMaterial> productdetailMaterials = new LinkedHashSet<>();
+    private Set<ProductdetailMaterial> productDetail_materials = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "productDetail")
@@ -109,5 +107,6 @@ public class ProductDetail implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "productDetail")
     private Set<Rating> ratings = new LinkedHashSet<>();
+
 
 }

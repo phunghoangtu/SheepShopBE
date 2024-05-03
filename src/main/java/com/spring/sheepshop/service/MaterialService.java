@@ -21,6 +21,7 @@ public class MaterialService {
     public List<Material> getAll(){
         return repository.getAll();
     }
+
     @Cacheable(value = "materialCache", key = "#name")
     public List<Material> getAllbyName(String name){
         return repository.searchByName('%'+name+'%');

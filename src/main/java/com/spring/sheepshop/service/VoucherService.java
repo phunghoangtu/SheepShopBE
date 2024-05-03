@@ -24,10 +24,7 @@ public class VoucherService {
         Voucher voucher = repository.getById(Id);
         return voucher;
     }
-    //        Timestamp current = new Timestamp(System.currentTimeMillis());
-////        LocalDateTime currentDate = LocalDateTime.now();
-////        LocalDateTime expiredDate = currentDate.plusDays(3);
-////        current.
+
     public Voucher add(VoucherRequest request){
         Voucher voucher = new Voucher();
         voucher.setCode(request.getCode());
@@ -39,15 +36,12 @@ public class VoucherService {
         voucher.setStartDate(request.getStartDate());
         voucher.setEndDate(request.getEndDate());
         voucher.setStatus(0);
-        voucher.setMinimum(Integer.valueOf(request.getMinimum()));
+        voucher.setMinimum(request.getMinimum());
 
         return repository.save(voucher);
     }
 
-    //        Timestamp current = new Timestamp(System.currentTimeMillis());
-//        LocalDateTime currentDate = LocalDateTime.now();
-//        LocalDateTime expiredDate = currentDate.plusDays(3);
-//        current.
+
     public Voucher update(Integer id, VoucherRequest request){
         Voucher voucher = repository.getById(id);
         voucher.setCode(request.getCode());

@@ -397,9 +397,9 @@ VALUES ('VC01', 'Voucher 1', 1, 1, 10, 0, GETDATE() , GETDATE() , GETDATE() , GE
 
 -- Thêm dữ liệu vào bảng "product"
 INSERT INTO Product (Code, Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
-VALUES ('SP01', 'Product 1', 'Product 1 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
-       ('SP02', 'Product 2', 'Product 2 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
-       ('SP03', 'Product 3', 'Product 3 description', GETDATE(), GETDATE() , 'Admin', 'Admin', 0);
+VALUES ('Linh tinh', 'Product 1', 'Product 1 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
+       ('RaRom', 'Product 2', 'Product 2 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
+       ('RamDom', 'Product 3', 'Product 3 description', GETDATE(), GETDATE() , 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "product_detail"
 INSERT INTO ProductDetail (Price, Discount, DiscountDate, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct, IdBrand, IdDesign, IdCategory)

@@ -94,17 +94,10 @@ public class ProductDetailExelService {
                        productDetail_size_color.setQuantity(Integer.parseInt(mang[2]));
                        productDetail_size_colorRepository.save(productDetail_size_color);
                    }
-
-
                }
-                
             }
             workbook.close();
             inputStream.close();
-
-
         }
-
-
     }
 }

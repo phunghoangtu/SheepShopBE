@@ -344,7 +344,7 @@ create table OperationHistory(
 
 -- Thêm dữ liệu vào bảng "customer"
 INSERT INTO Customer (Code, Fullname, Username, Password, Image, Gender, Phone, Email, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
-VALUES ('Customer Code', 'Full Name', 'username', '123456', 'Image URL', 1, '0123456789', 'customer@example.com',  GETDATE() , GETDATE() , 'Admin', 'Admin', 0);
+VALUES ('KH01', 'Full Name', 'username', '123456', 'Image URL', 1, '0123456789', 'customer@example.com',  GETDATE() , GETDATE() , 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "role"
 INSERT INTO Role (Name, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
@@ -352,7 +352,7 @@ VALUES ('Admin',  GETDATE() , GETDATE() , 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "employee"
 INSERT INTO Employee (Code, Fullname, Username, Password, Image, Gender, Phone, Email, CreateDate, UpdateDate, CreateBy, UpdateBy, status, IdRole)
-VALUES ('Employee Code', 'John Doe', 'sa', '123', 'Image URL', 1, '0123456789', 'employee@example.com',  GETDATE() , GETDATE() , 'Admin', 'Admin', 0, 1);
+VALUES ('NV01', 'John Doe', 'sa', '123', 'Image URL', 1, '0123456789', 'employee@example.com',  GETDATE() , GETDATE() , 'Admin', 'Admin', 0, 1);
 
 -- Thêm dữ liệu vào bảng "category"
 INSERT INTO Category (Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
@@ -392,21 +392,20 @@ VALUES ('Material 1', 'Material 1 description', GETDATE() , GETDATE() , 'Admin',
 
 -- Thêm dữ liệu vào bảng "voucher"
 INSERT INTO Voucher (Code, Name, TypeVoucher, IsVoucher, Discount, Cash, StartDate, EndDate, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
-VALUES ('VOUCHER001', 'Voucher 1', 1, 1, 10, 0, GETDATE() , GETDATE() , GETDATE() , GETDATE() , 'Admin', 'Admin', 0),
-       ('VOUCHER002', 'Voucher 2', 0, 1, 0, 50, GETDATE() , GETDATE() , GETDATE() , GETDATE() , 'Admin', 'Admin', 0);
+VALUES ('VC01', 'Voucher 1', 1, 1, 10, 0, GETDATE() , GETDATE() , GETDATE() , GETDATE() , 'Admin', 'Admin', 0),
+       ('VC02', 'Voucher 2', 0, 1, 0, 50, GETDATE() , GETDATE() , GETDATE() , GETDATE() , 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "product"
 INSERT INTO Product (Code, Name, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status)
-VALUES ('P001', 'Product 1', 'Product 1 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
-       ('P002', 'Product 2', 'Product 2 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
-       ('P003', 'Product 3', 'Product 3 description', GETDATE(), GETDATE() , 'Admin', 'Admin', 0);
+VALUES ('SP01', 'Product 1', 'Product 1 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
+       ('SP02', 'Product 2', 'Product 2 description', GETDATE(), GETDATE(), 'Admin', 'Admin', 0),
+       ('SP03', 'Product 3', 'Product 3 description', GETDATE(), GETDATE() , 'Admin', 'Admin', 0);
 
 -- Thêm dữ liệu vào bảng "product_detail"
 INSERT INTO ProductDetail (Price, Discount, DiscountDate, Description, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct, IdBrand, IdDesign, IdCategory)
 VALUES (100000, 10, GETDATE() , 'Product 1 detail', GETDATE(), GETDATE(), 'Admin', 'Admin', 0, 1, 1, 1,  1),
        (150000, 20, GETDATE() , 'Product 2 detail', GETDATE(), GETDATE() , 'Admin', 'Admin', 0, 2, 2, 2, 2),
-       (2000000, 30, GETDATE() , 'Product 3 detail', GETDATE(), GETDATE() , 'Admin', 'Admin', 0, 3, 3, 3,  3),
-	   (2000000, 30, GETDATE() , 'Product 3 detail', GETDATE() , GETDATE() , 'Admin', 'Admin', 0, 3, 3, 3,  3);
+       (2000000, 30, GETDATE() , 'Product 3 detail', GETDATE(), GETDATE() , 'Admin', 'Admin', 0, 3, 3, 3,  3);
 
 -- Thêm dữ liệu vào bảng "product_image"
 INSERT INTO ProductImage (Url, MainImage, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdProduct)
@@ -419,6 +418,12 @@ INSERT INTO ProductFault(Note, IdColor, IdSize, Quantity, IdProductDetail)
 VALUES ('Fault 1', 1, 1, 5, 1),
        ('Fault 2', 2, 2, 3, 2),
        ('Fault 3', 3, 3, 2, 3);
+
+-- Thêm dữ liệu vào bảng "ProductDetail_Material"
+INSERT INTO ProductDetail_Material(IdMaterial, IdProductDetail)
+VALUES ( 1, 1 ),
+	   ( 1, 1 ),
+       ( 2, 1 );
 
 -- Thêm dữ liệu vào bảng "product_detail_color_size"
 INSERT INTO ProductDetail_Color_Size (IdProductDetail, IdColor, IdSize, Quantity)
@@ -438,8 +443,8 @@ VALUES ('John Doe', '123456789', '123 Main Street', 'City', 'District', 'Ward', 
 
 -- Thêm dữ liệu vào bảng "coupon"
 INSERT INTO Coupon(Code, Name, IsType, Discount, Cash, CreateDate, UpdateDate, CreateBy, UpdateBy, Status, IdCustomer)
-VALUES ('COUPON001', 'Coupon 1', 1, 10, 0, GETDATE() , GETDATE() , 'Admin', 'Admin', 1, 1),
-       ('COUPON002', 'Coupon 2', 0, 0, 50.00, GETDATE() , GETDATE() , 'Admin', 'Admin', 1, 1);
+VALUES ('CP01', 'Coupon 1', 1, 10, 0, GETDATE() , GETDATE() , 'Admin', 'Admin', 1, 1),
+       ('CP02', 'Coupon 2', 0, 0, 50.00, GETDATE() , GETDATE() , 'Admin', 'Admin', 1, 1);
 
 -- Thêm dữ liệu vào bảng "bill"
 INSERT INTO Bill(Code, PurchaseDate, EstimatedDate, PaymentDate, DelyveryDate, TotalPrice, ShipPrice, TotalPriceLast, Note, PayType, PayStatus, TypeStatus, Status, CodeGHN, IdCoupon, IdAddress, IdEmployee, IdVoucher, IdCustomer)

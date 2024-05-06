@@ -32,7 +32,7 @@ public class FirebaseFileService {
             ClassPathResource serviceAccount = new ClassPathResource("firebase-service-account-key.json");
             storage = StorageOptions.newBuilder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount.getInputStream()))
-                    .setProjectId("sheepshop-ae7af").build().getService();
+                    .setProjectId("sheepshop-8ea50").build().getService();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -48,14 +48,14 @@ public class FirebaseFileService {
         String imageName = UUID.randomUUID().toString();
         Map<String, String> map = new HashMap<>();
         map.put("firebaseStorageDownloadTokens", imageName);
-        BlobId blobId = BlobId.of("sheepshop-ae7af.appspot.com", imageName);
+        BlobId blobId = BlobId.of("sheepshop-8ea50.appspot.com", imageName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
                 .setMetadata(map)
                 .setContentType(file.getContentType())
                 .build();
         storage.create(blobInfo, file.getInputStream());
         StringBuilder url = new StringBuilder();
-        url.append("https://firebasestorage.googleapis.com/v0/b/sheepshop-ae7af.appspot.com/o/");
+        url.append("https://firebasestorage.googleapis.com/v0/b/sheepshop-8ea50.appspot.com/o/");
         url.append(imageName);
         url.append("?alt=media");
         return url.toString();
@@ -64,15 +64,15 @@ public class FirebaseFileService {
     public String deleteFile(String url) {
         try {
             String fileName =
-                    url.replace("https://firebasestorage.googleapis.com/v0/b/sheepshop-ae7af.appspot.com/o/", "").replace("?alt=media", "");
+                    url.replace("https://firebasestorage.googleapis.com/v0/b/sheepshop-8ea50.appspot.com/o/", "").replace("?alt=media", "");
             ClassPathResource serviceAccount = new ClassPathResource("firebase-service-account-key.json");
-            String projectId = "sheepshop-ae7af";
+            String projectId = "sheepshop-8ea50";
             Storage storage = StorageOptions.newBuilder()
                     .setProjectId(projectId)
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount.getInputStream()))
                     .build()
                     .getService();
-            String bucketName = "sheepshop-ae7af.appspot.com";
+            String bucketName = "sheepshop-8ea50.appspot.com";
             Bucket bucket = storage.get(bucketName);
             bucket.get(fileName).delete();
             System.out.println("File deleted successfully." + fileName);

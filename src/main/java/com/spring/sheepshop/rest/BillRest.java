@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/bill")
 public class BillRest {

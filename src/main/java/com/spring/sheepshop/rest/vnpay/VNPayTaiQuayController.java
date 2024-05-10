@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@CrossOrigin("http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/api/vnpaytaiquay")
 public class VNPayTaiQuayController {

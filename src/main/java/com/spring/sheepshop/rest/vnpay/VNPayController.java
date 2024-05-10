@@ -7,7 +7,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
-@CrossOrigin("http://127.0.0.1:5500")
+
 @RestController
 @RequestMapping("/api/vnpay")
 public class VNPayController {

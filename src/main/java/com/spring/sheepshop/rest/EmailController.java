@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/sendmail")
 public class EmailController {
